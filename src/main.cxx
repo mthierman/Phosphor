@@ -16,7 +16,7 @@ struct Window final : public glow::Window
     auto on_setting_change(::WPARAM wParam, ::LPARAM lParam) -> int;
 
   private:
-    wil::com_ptr_t<IDesktopWallpaper, wil::err_exception_policy> m_wallpaper;
+    wil::com_ptr_t<IDesktopWallpaper> m_wallpaper;
 };
 
 auto Window::WndProc(::UINT uMsg, ::WPARAM wParam, ::LPARAM lParam) -> ::LRESULT
