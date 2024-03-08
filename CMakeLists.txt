@@ -15,7 +15,10 @@ add_subdirectory(libs/Glow)
 
 include(libs/Glow/cmake/ReleaseInfo.cmake)
 
-add_executable(${PROJECT_NAME})
+add_executable(
+    ${PROJECT_NAME}
+    WIN32
+)
 
 target_sources(
     ${PROJECT_NAME}
