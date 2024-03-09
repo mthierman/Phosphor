@@ -68,5 +68,9 @@ auto main() -> int
     Window window;
     window.create_window();
 
+    // NOTIFYICONDATA iconData{sizeof(NOTIFYICONDATA)};
+    // iconData.hWnd = window.m_hwnd.get();
+    // Shell_NotifyIconA(NIM_ADD, );
+
     return app();
 }
