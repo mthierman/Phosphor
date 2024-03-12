@@ -43,13 +43,11 @@ auto Window::on_setting_change(::WPARAM wParam, ::LPARAM lParam) -> int
 
         if (!std::filesystem::exists(images.first))
         {
-            OutputDebugStringA("dark.png didn't exist!");
             images.first = pictures / "wallpapers" / "dark.jpg";
         }
 
         if (!std::filesystem::exists(images.second))
         {
-            OutputDebugStringA("light.png didn't exist!");
             images.second = pictures / "wallpapers" / "light.jpg";
         }
 
