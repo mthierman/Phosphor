@@ -7,6 +7,8 @@
 #include <wil/com.h>
 #include <glow/glow.hxx>
 
+namespace Phosphor
+{
 struct Window final : public glow::Window
 {
     auto WndProc(::UINT uMsg, ::WPARAM wParam, ::LPARAM lParam) -> ::LRESULT override;
@@ -17,3 +19,4 @@ struct Window final : public glow::Window
     wil::com_ptr_t<IDesktopWallpaper> m_wallpaper;
     bool m_mode;
 };
+} // namespace Phosphor

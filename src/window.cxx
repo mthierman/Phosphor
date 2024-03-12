@@ -1,6 +1,8 @@
 #include "window.hxx"
 #include "utility.hxx"
 
+namespace Phosphor
+{
 auto Window::WndProc(::UINT uMsg, ::WPARAM wParam, ::LPARAM lParam) -> ::LRESULT
 {
     switch (uMsg)
@@ -40,3 +42,4 @@ auto Window::on_setting_change(::WPARAM wParam, ::LPARAM lParam) -> int
 
     return 0;
 }
+} // namespace Phosphor

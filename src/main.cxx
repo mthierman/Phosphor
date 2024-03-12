@@ -5,7 +5,7 @@ auto main() -> int
 {
     glow::CoInitialize coInit;
     glow::App app;
-    Window window;
+    Phosphor::Window window;
     window.create_window();
 
     return app();
