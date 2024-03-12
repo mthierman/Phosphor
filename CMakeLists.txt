@@ -23,6 +23,8 @@ add_executable(
 target_sources(
     ${PROJECT_NAME}
     PRIVATE src/main.cxx
+            src/window.cxx
+            src/utility.cxx
             data/phosphor.rc
 )
 
