@@ -17,6 +17,6 @@ struct Window final : public glow::Window
 
   private:
     wil::com_ptr_t<IDesktopWallpaper> m_wallpaper;
-    bool m_mode;
+    bool m_isDark;
 };
 } // namespace Phosphor

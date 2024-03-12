@@ -17,28 +17,34 @@ auto Window::WndProc(::UINT uMsg, ::WPARAM wParam, ::LPARAM lParam) -> ::LRESULT
 auto Window::on_create(::WPARAM wParam, ::LPARAM lParam) -> int
 {
     m_wallpaper = wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper, CLSCTX_ALL);
+    m_isDark = is_dark();
 
     return 0;
 }
 
 auto Window::on_setting_change(::WPARAM wParam, ::LPARAM lParam) -> int
 {
-    auto isDark{is_dark()};
+    if (m_isDark == is_dark()) { return 0; }
 
-    unsigned int count;
-    Phosphor::check(m_wallpaper->GetMonitorDevicePathCount(&count));
+    else
+    {
+        m_isDark = is_dark();
 
-    LPWSTR monitor;
-    Phosphor::check(m_wallpaper->GetMonitorDevicePathAt(0, &monitor));
+        unsigned int count;
+        Phosphor::check(m_wallpaper->GetMonitorDevicePathCount(&count));
 
-    auto pictures{glow::known_folder(FOLDERID_Pictures)};
+        LPWSTR monitor;
+        Phosphor::check(m_wallpaper->GetMonitorDevicePathAt(0, &monitor));
 
-    auto images{std::make_pair(pictures / "wallpapers" / "dark.jpg",
-                               pictures / "wallpapers" / "light.jpg")};
+        auto pictures{glow::known_folder(FOLDERID_Pictures)};
 
-    if (isDark) { m_wallpaper->SetWallpaper(0, images.first.wstring().c_str()); }
+        auto images{std::make_pair(pictures / "wallpapers" / "dark.jpg",
+                                   pictures / "wallpapers" / "light.jpg")};
 
-    else { m_wallpaper->SetWallpaper(0, images.second.wstring().c_str()); }
+        if (m_isDark) { m_wallpaper->SetWallpaper(0, images.first.wstring().c_str()); }
+
+        else { m_wallpaper->SetWallpaper(0, images.second.wstring().c_str()); }
+    }
 
     return 0;
 }
