@@ -38,12 +38,36 @@ auto Window::on_setting_change(::WPARAM wParam, ::LPARAM lParam) -> int
 
         auto pictures{glow::known_folder(FOLDERID_Pictures)};
 
-        auto images{std::make_pair(pictures / "wallpapers" / "dark.jpg",
-                                   pictures / "wallpapers" / "light.jpg")};
+        auto images{std::make_pair(pictures / "wallpapers" / "dark.png",
+                                   pictures / "wallpapers" / "light.png")};
 
-        if (m_isDark) { m_wallpaper->SetWallpaper(0, images.first.wstring().c_str()); }
+        if (!std::filesystem::exists(images.first))
+        {
+            OutputDebugStringA("dark.png didn't exist!");
+            images.first = pictures / "wallpapers" / "dark.jpg";
+        }
 
-        else { m_wallpaper->SetWallpaper(0, images.second.wstring().c_str()); }
+        if (!std::filesystem::exists(images.second))
+        {
+            OutputDebugStringA("light.png didn't exist!");
+            images.second = pictures / "wallpapers" / "light.jpg";
+        }
+
+        if (m_isDark)
+        {
+            if (std::filesystem::exists(images.first))
+            {
+                m_wallpaper->SetWallpaper(0, images.first.wstring().c_str());
+            }
+        }
+
+        else
+        {
+            if (std::filesystem::exists(images.second))
+            {
+                m_wallpaper->SetWallpaper(0, images.second.wstring().c_str());
+            }
+        }
     }
 
     return 0;
