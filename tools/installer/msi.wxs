@@ -19,7 +19,7 @@
         </StandardDirectory>
 
         <StandardDirectory Id="StartupFolder">
-            <Directory Id="Startup" Name="Programs"></Directory>
+            <Directory Id="Startup"></Directory>
         </StandardDirectory>
 
         <MediaTemplate EmbedCab="yes" />
