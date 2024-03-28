@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Windows.h>
-#include <ShObjIdl.h>
 #include <wil/com.h>
 #include <glow/glow.hxx>
 
@@ -14,6 +13,6 @@ struct Phosphor final : public glow::Window
     auto check(::HRESULT hr) -> void;
 
     glow::CoInitialize m_coInit;
-    wil::com_ptr_t<IDesktopWallpaper> m_wallpaper;
+    wil::com_ptr<IDesktopWallpaper> m_wallpaper;
     bool m_isDark;
 };

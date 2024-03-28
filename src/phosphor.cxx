@@ -32,10 +32,10 @@ auto Phosphor::on_setting_change(::WPARAM wParam, ::LPARAM lParam) -> int
         m_isDark = is_dark();
 
         unsigned int count;
-        Phosphor::check(m_wallpaper->GetMonitorDevicePathCount(&count));
+        check(m_wallpaper->GetMonitorDevicePathCount(&count));
 
         LPWSTR monitor;
-        Phosphor::check(m_wallpaper->GetMonitorDevicePathAt(0, &monitor));
+        check(m_wallpaper->GetMonitorDevicePathAt(0, &monitor));
 
         auto pictures{glow::known_folder(FOLDERID_Pictures)};
 
