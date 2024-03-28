@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+    xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://wixtoolset.org/schemas/v4/wxs https://raw.githubusercontent.com/wixtoolset/web/master/src/xsd4/wix.xsd
+                        http://wixtoolset.org/schemas/v4/wxs/ui https://raw.githubusercontent.com/wixtoolset/web/master/src/xsd4/ui.xsd">
+    <Package Name="Phosphor" Version="0.0.1" Manufacturer="Mike Thierman"
+        UpgradeCode="34323635-38DA-4816-9E0B-B4F02B374BA1" InstallerVersion="500">
+        <MajorUpgrade DowngradeErrorMessage="A newer version was detected." />
+
+        <StandardDirectory Id="LocalAppDataFolder">
+            <Directory Id="APPINSTALLDIR" Name="Phosphor">
+                <Directory Id="Application"></Directory>
+            </Directory>
+        </StandardDirectory>
+
+        <StandardDirectory Id="StartMenuFolder">
+            <Directory Id="StartMenu" Name="Programs"></Directory>
+        </StandardDirectory>
+
+        <StandardDirectory Id="StartupFolder">
+            <Directory Id="Startup" Name="Programs"></Directory>
+        </StandardDirectory>
+
+        <MediaTemplate EmbedCab="yes" />
+
+        <ui:WixUI Id="WixUI_InstallDir" InstallDirectory="APPINSTALLDIR" />
+        <WixVariable Id="WixUILicenseRtf" Value="data/installer/LICENSE.rtf" />
+        <WixVariable Id="WixUIBannerBmp" Value="data/installer/WixUIBannerBmp.png" />
+        <WixVariable Id="WixUIDialogBmp" Value="data/installer/WixUIDialogBmp.png" />
+        <WixVariable Id="WixUIExclamationIco" Value="data/installer/WixUIExclamationIco.ico" />
+        <WixVariable Id="WixUIInfoIco" Value="data/installer/WixUIInfoIco.ico" />
+        <WixVariable Id="WixUINewIco" Value="data/installer/WixUINewIco.ico" />
+        <WixVariable Id="WixUIUpIco" Value="data/installer/WixUIUpIco.ico" />
+
+        <Feature Id="Main">
+            <Component Directory="Application">
+                <File Id="Phosphor" Source="build/Release/Phosphor.exe" />
+                <Shortcut Name="Phosphor" Directory="StartMenu" Advertise="yes" Icon="Phosphor.exe" />
+                <Shortcut Name="Phosphor" Directory="Startup" Advertise="yes" Icon="Phosphor.exe" />
+                <Environment Action="set" Id="Path" Name="Path" Part="last" Permanent="no"
+                    Value="[APPINSTALLDIR]" />
+            </Component>
+        </Feature>
+
+        <Icon Id="Phosphor.exe" SourceFile="data/icon.ico" />
+        <Property Id="ARPPRODUCTICON" Value="Phosphor.exe" />
+    </Package>
+</Wix>
