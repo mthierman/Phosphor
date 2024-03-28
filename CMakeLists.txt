@@ -23,9 +23,12 @@ add_executable(
 target_sources(
     ${PROJECT_NAME}
     PRIVATE src/main.cxx
-            src/window.cxx
-            src/utility.cxx
+            src/phosphor.cxx
             data/phosphor.rc
+    PRIVATE FILE_SET
+            HEADERS
+            FILES
+            src/phosphor.hxx
 )
 
 target_link_libraries(

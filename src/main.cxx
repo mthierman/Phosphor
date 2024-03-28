@@ -1,14 +1,12 @@
 #include <glow/glow.hxx>
-#include "window.hxx"
+#include "phosphor.hxx"
 
 auto main() -> int
 {
-    glow::CoInitialize coInit;
-
     glow::App app;
 
-    Phosphor::Window window;
-    window.create_window();
+    Phosphor phosphor;
+    phosphor.create_window();
 
     return app();
 }

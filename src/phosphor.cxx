@@ -1,9 +1,10 @@
-#include "window.hxx"
-#include "utility.hxx"
+#include "phosphor.hxx"
+#include <print>
+#include <system_error>
+#include <filesystem>
+#include <utility>
 
-namespace Phosphor
-{
-auto Window::WndProc(::UINT uMsg, ::WPARAM wParam, ::LPARAM lParam) -> ::LRESULT
+auto Phosphor::WndProc(::UINT uMsg, ::WPARAM wParam, ::LPARAM lParam) -> ::LRESULT
 {
     switch (uMsg)
     {
@@ -14,7 +15,7 @@ auto Window::WndProc(::UINT uMsg, ::WPARAM wParam, ::LPARAM lParam) -> ::LRESULT
     return ::DefWindowProcA(m_hwnd.get(), uMsg, wParam, lParam);
 }
 
-auto Window::on_create(::WPARAM wParam, ::LPARAM lParam) -> int
+auto Phosphor::on_create(::WPARAM wParam, ::LPARAM lParam) -> int
 {
     m_wallpaper = wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper, CLSCTX_ALL);
     m_isDark = is_dark();
@@ -22,7 +23,7 @@ auto Window::on_create(::WPARAM wParam, ::LPARAM lParam) -> int
     return 0;
 }
 
-auto Window::on_setting_change(::WPARAM wParam, ::LPARAM lParam) -> int
+auto Phosphor::on_setting_change(::WPARAM wParam, ::LPARAM lParam) -> int
 {
     if (m_isDark == is_dark()) { return 0; }
 
@@ -70,4 +71,8 @@ auto Window::on_setting_change(::WPARAM wParam, ::LPARAM lParam) -> int
 
     return 0;
 }
-} // namespace Phosphor
+
+auto Phosphor::check(::HRESULT hr) -> void
+{
+    std::println("{}", std::system_category().message(hr));
+}
