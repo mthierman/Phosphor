@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.28)
 
-project(
-    Phosphor
-    VERSION 0.0.1
-)
+project(Phosphor VERSION 0.0.1)
 
 enable_testing()
 
@@ -17,26 +14,26 @@ file(
     DOWNLOAD
     "https://aka.ms/vs/17/release/vc_redist.x64.exe"
     "${PROJECT_BINARY_DIR}/vc_redist.x64.exe"
-)
+    )
 
 add_executable(
     ${PROJECT_NAME}
     WIN32
-)
+    )
 
 target_sources(
     ${PROJECT_NAME}
-    PRIVATE src/main.cxx
-            src/phosphor.cxx
-            data/phosphor.rc
+    PRIVATE "src/main.cxx"
+            "src/phosphor.cxx"
+            "data/phosphor.rc"
     PRIVATE FILE_SET
             HEADERS
             FILES
-            src/phosphor.hxx
-)
+            "src/phosphor.hxx"
+    )
 
 target_link_libraries(
     ${PROJECT_NAME}
     PRIVATE glow::glow
             glow::flags
-)
+    )
