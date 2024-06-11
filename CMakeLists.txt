@@ -4,11 +4,7 @@ project(Phosphor VERSION 0.0.1)
 
 enable_testing()
 
-include(FetchContent)
-
 add_subdirectory(libs/Glow)
-
-include(libs/Glow/cmake/ReleaseInfo.cmake)
 
 file(
     DOWNLOAD
@@ -35,5 +31,5 @@ target_sources(
 target_link_libraries(
     ${PROJECT_NAME}
     PRIVATE glow::glow
-            glow::flags
+            common::flags
     )

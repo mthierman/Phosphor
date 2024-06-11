@@ -6,5 +6,35 @@
         "minor": 28,
         "patch": 0
     },
-    "include": ["libs/Glow/CMakePresets.json"]
+    "include": ["libs/Glow/libs/cmake-modules/CMakePresets.json"],
+    "configurePresets": [
+        {
+            "name": "Development",
+            "inherits": ["Ninja Multi-Config", "Compiler: MSVC"]
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "Debug",
+            "configurePreset": "Development",
+            "configuration": "Debug"
+        },
+        {
+            "name": "Release",
+            "configurePreset": "Development",
+            "configuration": "Release"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "Debug",
+            "configurePreset": "Development",
+            "configuration": "Debug"
+        },
+        {
+            "name": "Release",
+            "configurePreset": "Development",
+            "configuration": "Release"
+        }
+    ]
 }
