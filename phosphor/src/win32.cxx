@@ -1,10 +1,10 @@
 #include <Windows.h>
 #include <cstdlib>
 
-auto WINAPI wWinMain(HINSTANCE /* hinstance */,
-                     HINSTANCE /* hprevinstance */,
-                     PWSTR /* pcmdline */,
-                     int /* ncmdshow */) -> int {
+auto wWinMain(HINSTANCE /* hinstance */,
+              HINSTANCE /* hprevinstance */,
+              PWSTR /* pcmdline */,
+              int /* ncmdshow */) -> int {
     MSG msg {};
     int r {};
 
