@@ -5,6 +5,7 @@
 #include <filesystem>
 #include <utility>
 
+// https://stackoverflow.com/questions/51942953/is-it-possible-to-create-a-message-loop-without-creating-a-window-in-c
 // https://stackoverflow.com/questions/8366577/thoughts-on-a-different-way-to-running-a-win32-event-loop-without-wndproc
 // https://stackoverflow.com/questions/63614685/why-does-the-win32-message-loop-stop-working-when-threaded
 
