@@ -15,7 +15,6 @@ add_executable(
     phosphor
     WIN32
     )
-
 target_sources(
     phosphor
     PRIVATE "src/main.cxx"
