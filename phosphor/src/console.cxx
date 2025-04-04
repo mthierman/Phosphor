@@ -54,6 +54,23 @@ auto wmain(int /* argc */, wchar_t* /* argv */[], wchar_t* /* envp */[]) -> int 
 
     HWND window_handle;
 
+    if (GetClassInfoExW(instance, window_class.lpszClassName, &window_class) == 0) {
+        RegisterClassExW(&window_class);
+    }
+
+    CreateWindowExW(0,
+                    window_class.lpszClassName,
+                    window_class.lpszClassName,
+                    WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_VISIBLE,
+                    CW_USEDEFAULT,
+                    CW_USEDEFAULT,
+                    CW_USEDEFAULT,
+                    CW_USEDEFAULT,
+                    nullptr,
+                    nullptr,
+                    window_class.hInstance,
+                    nullptr);
+
     MSG msg {};
     int r {};
 
