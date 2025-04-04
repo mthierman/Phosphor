@@ -17,12 +17,34 @@ add_executable(
     )
 target_sources(
     phosphor
-    PRIVATE "src/main.cxx"
-            "src/phosphor.cxx"
+    PRIVATE "src/win32.cxx"
             "data/phosphor.rc"
     )
 target_link_libraries(
     phosphor
+    PRIVATE phosphor::config
+            dwmapi
+            gdiplus
+            icu
+            Urlmon
+            WindowsApp
+            ada
+            glaze
+            webview2
+            wil
+            cppwinrt
+    )
+add_executable(
+    phosphor_console
+    WIN32
+    )
+target_sources(
+    phosphor_console
+    PRIVATE "src/console.cxx"
+            "data/phosphor.rc"
+    )
+target_link_libraries(
+    phosphor_console
     PRIVATE phosphor::config
             dwmapi
             gdiplus
