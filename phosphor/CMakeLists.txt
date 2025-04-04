@@ -11,20 +11,6 @@ include(wil)
 include(cppwinrt)
 include(ada)
 include(glaze)
-target_link_libraries(
-    phosphor
-    PRIVATE phosphor::config
-            dwmapi
-            gdiplus
-            icu
-            Urlmon
-            WindowsApp
-            ada
-            glaze
-            webview2
-            wil
-            cppwinrt
-    )
 add_executable(
     phosphor
     WIN32
@@ -38,15 +24,15 @@ target_sources(
     )
 target_link_libraries(
     phosphor
-    PRIVATE pane::config
+    PRIVATE phosphor::config
             dwmapi
             gdiplus
             icu
             Urlmon
             WindowsApp
-    PUBLIC ada
-           glaze
-           webview2
-           wil
-           cppwinrt
+            ada
+            glaze
+            webview2
+            wil
+            cppwinrt
     )
