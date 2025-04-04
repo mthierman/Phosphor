@@ -5,6 +5,9 @@
 #include <filesystem>
 #include <utility>
 
+// https://stackoverflow.com/questions/8366577/thoughts-on-a-different-way-to-running-a-win32-event-loop-without-wndproc
+// https://stackoverflow.com/questions/63614685/why-does-the-win32-message-loop-stop-working-when-threaded
+
 struct Phosphor final : public glow::Window {
     auto WndProc(::UINT uMsg, ::WPARAM wParam, ::LPARAM lParam) -> ::LRESULT override;
     auto on_create(::WPARAM wParam, ::LPARAM lParam) -> int;
