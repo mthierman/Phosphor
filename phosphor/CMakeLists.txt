@@ -34,10 +34,7 @@ target_link_libraries(
             wil
             cppwinrt
     )
-add_executable(
-    phosphor_console
-    WIN32
-    )
+add_executable(phosphor_console)
 target_sources(
     phosphor_console
     PRIVATE "src/console.cxx"
