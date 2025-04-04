@@ -1,35 +1,8 @@
-cmake_minimum_required(VERSION 3.28)
-
+cmake_minimum_required(VERSION 3.30)
 project(Phosphor VERSION 0.0.1)
-
-enable_testing()
-
-add_subdirectory(libs/Glow)
-
-file(
-    DOWNLOAD
-    "https://aka.ms/vs/17/release/vc_redist.x64.exe"
-    "${PROJECT_BINARY_DIR}/vc_redist.x64.exe"
+list(
+    APPEND
+    CMAKE_MODULE_PATH
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
     )
-
-add_executable(
-    ${PROJECT_NAME}
-    WIN32
-    )
-
-target_sources(
-    ${PROJECT_NAME}
-    PRIVATE "src/main.cxx"
-            "src/phosphor.cxx"
-            "data/phosphor.rc"
-    PRIVATE FILE_SET
-            HEADERS
-            FILES
-            "src/phosphor.hxx"
-    )
-
-target_link_libraries(
-    ${PROJECT_NAME}
-    PRIVATE glow::glow
-            common::flags
-    )
+add_subdirectory(phosphor)
