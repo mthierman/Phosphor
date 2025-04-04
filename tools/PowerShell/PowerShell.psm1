@@ -10,8 +10,8 @@ function Compress-Phosphor
 function Restore-Wix
 {
     dotnet tool restore
-    wix extension add WixToolset.UI.wixext/5.0.0
-    wix extension add WixToolset.BootstrapperApplications.wixext/5.0.0
+    wix extension add WixToolset.UI.wixext/5.0.2
+    wix extension add WixToolset.BootstrapperApplications.wixext/5.0.2
 }
 
 function Build-PhosphorInstaller
