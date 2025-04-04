@@ -55,7 +55,7 @@ auto wmain(int /* argc */, wchar_t* /* argv */[], wchar_t* /* envp */[]) -> int 
                                .hCursor { arrow_cursor() },
                                .hbrBackground { nullptr },
                                .lpszMenuName { nullptr },
-                               .lpszClassName { L"Window" },
+                               .lpszClassName { L"MessageWindow" },
                                .hIconSm { application_icon() } };
 
     HWND window_handle;
