@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <print>
 #include <cstdlib>
 
 auto CALLBACK window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
@@ -10,6 +11,10 @@ auto CALLBACK window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam
     //         self->window_handle = hwnd;
     //     }
     // }
+
+    if (msg == WM_SETTINGCHANGE) {
+        std::println("WM_SETTINGCHANGE");
+    }
 
     return DefWindowProcW(hwnd, msg, wparam, lparam);
 }
@@ -59,8 +64,7 @@ auto wmain(int /* argc */, wchar_t* /* argv */[], wchar_t* /* envp */[]) -> int 
     [[maybe_unused]] auto window { CreateWindowExW(0,
                                                    window_class.lpszClassName,
                                                    window_class.lpszClassName,
-                                                   WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN
-                                                       | WS_VISIBLE,
+                                                   WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
                                                    CW_USEDEFAULT,
                                                    CW_USEDEFAULT,
                                                    CW_USEDEFAULT,
