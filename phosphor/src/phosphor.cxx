@@ -17,10 +17,12 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
         auto settings { Settings() };
         switch (settings.theme) {
             case Theme::Dark: {
-                pane::debug("{}", "dark");
+                // pane::debug("{}", "dark");
+                pane::debug(u8"dark");
             } break;
             case Theme::Light: {
-                pane::debug("{}", "light");
+                // pane::debug("{}", "light");
+                pane::debug(u8"light");
             } break;
         }
 
