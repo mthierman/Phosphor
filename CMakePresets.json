@@ -22,6 +22,11 @@
             }
         },
         {
+            "name": "Ninja",
+            "hidden": true,
+            "generator": "Ninja"
+        },
+        {
             "name": "Ninja Multi-Config",
             "hidden": true,
             "generator": "Ninja Multi-Config"
