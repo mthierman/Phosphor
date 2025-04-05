@@ -15,6 +15,15 @@ struct Settings {
 auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
         auto settings { Settings() };
+        switch (settings.theme) {
+            case Theme::Dark: {
+                pane::message_box::info(u8"dark");
+            } break;
+            case Theme::Light: {
+                pane::message_box::info(u8"light");
+            } break;
+        }
+
         auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
                                                                           CLSCTX_ALL) };
 
