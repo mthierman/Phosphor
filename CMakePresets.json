@@ -36,11 +36,11 @@
             "generator": "Ninja Multi-Config"
         },
         {
-            "name": "MSVC: MSBuild",
+            "name": "CL: Visual Studio 17 2022",
             "inherits": ["Visual Studio 17 2022"]
         },
         {
-            "name": "MSVC: Ninja",
+            "name": "CL: Ninja",
             "inherits": ["Ninja"],
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "cl",
@@ -48,7 +48,7 @@
             }
         },
         {
-            "name": "MSVC: Ninja Multi-Config",
+            "name": "CL: Ninja Multi-Config",
             "inherits": ["Ninja Multi-Config"],
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "cl",
