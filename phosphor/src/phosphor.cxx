@@ -7,12 +7,18 @@
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.UI.ViewManagement.h>
 #include <pane/pane.hxx>
+#include <glaze/glaze.hpp>
 
 namespace winrt {
 using namespace winrt::Windows::UI::ViewManagement;
 }; // namespace winrt
 
-enum Theme { Light = 0, Dark };
+enum struct Theme { Light = 0, Dark };
+// Register Theme enum as strings for glaze
+// template <> struct glz::meta<Theme> {
+//     using enum Theme;
+//     static constexpr auto value = enumerate(Light, Dark);
+// };
 
 struct Settings {
     Theme theme { Theme::Dark };
@@ -20,7 +26,7 @@ struct Settings {
 
 auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
-        pane::debug(u8"WM_SETTINGCHANGE");
+        // pane::debug(u8"WM_SETTINGCHANGE");
 
         auto settings { Settings() };
         auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
@@ -33,11 +39,11 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
 
         switch (pane::color(winrt::UIColorType::Background).is_dark()) {
             case true: {
-                pane::debug(u8"DARK");
+                // pane::debug(u8"DARK");
                 settings.theme = Theme::Dark;
             } break;
             case false: {
-                pane::debug(u8"LIGHT");
+                // pane::debug(u8"LIGHT");
                 settings.theme = Theme::Light;
             } break;
         }
@@ -55,6 +61,10 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
                 } break;
             }
         }
+
+        std::u8string buffer;
+        auto json { glz::write_json(settings.theme, buffer) };
+        pane::debug(buffer);
     }
 
     return DefWindowProcW(hwnd, msg, wparam, lparam);
