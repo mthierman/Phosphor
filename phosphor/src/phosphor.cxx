@@ -1,19 +1,41 @@
 #include <Windows.h>
 #include <ShObjIdl.h>
 #include <cstdlib>
+#include <utility>
 #include <print>
 #include <wil/com.h>
 #include <pane/pane.hxx>
 
-struct Settings {
-    enum Theme { Light = 0, Dark };
+enum Theme { Light = 0, Dark };
 
+struct Settings {
     Theme theme { Theme::Dark };
 };
 
 auto CALLBACK window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
-        std::println("WM_SETTINGCHANGE");
+        auto settings { Settings() };
+        auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
+                                                                          CLSCTX_ALL) };
+
+        unsigned int count;
+        desktop_wallpaper->GetMonitorDevicePathCount(&count);
+        LPWSTR monitor;
+        desktop_wallpaper->GetMonitorDevicePathAt(0, &monitor);
+        auto pictures_directory { pane::filesystem::known_folder(FOLDERID_Pictures) };
+        if (pictures_directory) {
+            auto dark { pictures_directory.value() / u"dark.jpg" };
+            auto light { pictures_directory.value() / u"light.jpg" };
+
+            switch (settings.theme) {
+                case Theme::Dark: {
+                    desktop_wallpaper->SetWallpaper(0, dark.c_str());
+                } break;
+                case Theme::Light: {
+                    desktop_wallpaper->SetWallpaper(0, light.c_str());
+                } break;
+            }
+        }
     }
 
     return DefWindowProcW(hwnd, msg, wparam, lparam);
@@ -82,11 +104,6 @@ auto wWinMain(HINSTANCE /* hinstance */,
               PWSTR /* pcmdline */,
               int /* ncmdshow */) -> int {
     auto co_init { pane::co_init::apartment_threaded() };
-
-    auto settings { Settings() };
-
-    auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
-                                                                      CLSCTX_ALL) };
 
     make_window();
 
