@@ -4,7 +4,13 @@
 #include <utility>
 #include <print>
 #include <wil/com.h>
+#include <winrt/Windows.Foundation.h>
+#include <winrt/Windows.UI.ViewManagement.h>
 #include <pane/pane.hxx>
+
+namespace winrt {
+using namespace winrt::Windows::UI::ViewManagement;
+}; // namespace winrt
 
 enum Theme { Light = 0, Dark };
 
@@ -14,26 +20,26 @@ struct Settings {
 
 auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
+        auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
+                                                                          CLSCTX_ALL) };
+        UINT count;
+        LPWSTR monitor;
+        desktop_wallpaper->GetMonitorDevicePathCount(&count);
+        desktop_wallpaper->GetMonitorDevicePathAt(0, &monitor);
+
         auto settings { Settings() };
-        switch (settings.theme) {
-            case Theme::Dark: {
-                // pane::debug("{}", "dark");
-                pane::debug(u8"dark");
+
+        auto pictures_directory { pane::filesystem::known_folder(FOLDERID_Pictures) };
+
+        switch (pane::color(winrt::UIColorType::Background).is_dark()) {
+            case true: {
+                settings.theme = Theme::Dark;
             } break;
-            case Theme::Light: {
-                // pane::debug("{}", "light");
-                pane::debug(u8"light");
+            case false: {
+                settings.theme = Theme::Light;
             } break;
         }
 
-        auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
-                                                                          CLSCTX_ALL) };
-
-        unsigned int count;
-        desktop_wallpaper->GetMonitorDevicePathCount(&count);
-        LPWSTR monitor;
-        desktop_wallpaper->GetMonitorDevicePathAt(0, &monitor);
-        auto pictures_directory { pane::filesystem::known_folder(FOLDERID_Pictures) };
         if (pictures_directory) {
             auto dark { pictures_directory.value() / u"dark.jpg" };
             auto light { pictures_directory.value() / u"light.jpg" };
