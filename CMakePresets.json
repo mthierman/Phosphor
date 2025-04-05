@@ -10,7 +10,7 @@
         {
             "name": "Common",
             "hidden": true,
-            "binaryDir": "${sourceDir}/build"
+            "binaryDir": "build"
         },
         {
             "name": "Visual Studio 17 2022",
@@ -23,17 +23,20 @@
             "toolset": {
                 "strategy": "set",
                 "value": "host=x64"
-            }
+            },
+            "binaryDir": "build"
         },
         {
             "name": "Ninja",
             "hidden": true,
-            "generator": "Ninja"
+            "generator": "Ninja",
+            "binaryDir": "build"
         },
         {
             "name": "Ninja Multi-Config",
             "hidden": true,
-            "generator": "Ninja Multi-Config"
+            "generator": "Ninja Multi-Config",
+            "binaryDir": "build"
         },
         {
             "name": "CL: Visual Studio 17 2022",
