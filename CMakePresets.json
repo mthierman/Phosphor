@@ -56,7 +56,7 @@
             }
         },
         {
-            "name": "ClangCL: MSBuild",
+            "name": "ClangCL: Visual Studio 17 2022",
             "inherits": ["Visual Studio 17 2022"],
             "toolset": {
                 "strategy": "set",
@@ -116,48 +116,68 @@
             ]
         },
         {
-            "name": "MSBuild: MSVC (Debug)",
+            "name": "CL: Visual Studio 17 2022 (Debug)",
             "inherits": ["MSBuild Options"],
             "configuration": "Debug",
-            "configurePreset": "MSBuild: MSVC"
+            "configurePreset": "CL: Visual Studio 17 2022"
         },
         {
-            "name": "MSBuild: MSVC (Release)",
+            "name": "CL: Visual Studio 17 2022 (Release)",
             "inherits": ["MSBuild Options"],
             "configuration": "Release",
-            "configurePreset": "MSBuild: MSVC"
+            "configurePreset": "CL: Visual Studio 17 2022"
         },
         {
-            "name": "MSBuild: ClangCL (Debug)",
+            "name": "CL: Ninja (Debug)",
+            "configuration": "Debug",
+            "configurePreset": "CL: Ninja"
+        },
+        {
+            "name": "CL: Ninja (Release)",
+            "configuration": "Release",
+            "configurePreset": "CL: Ninja"
+        },
+        {
+            "name": "CL: Ninja Multi-Config (Debug)",
+            "configuration": "Debug",
+            "configurePreset": "CL: Ninja Multi-Config"
+        },
+        {
+            "name": "CL: Ninja Multi-Config (Release)",
+            "configuration": "Release",
+            "configurePreset": "CL: Ninja Multi-Config"
+        },
+        {
+            "name": "ClangCL: Visual Studio 17 2022 (Debug)",
             "inherits": ["MSBuild Options"],
             "configuration": "Debug",
-            "configurePreset": "MSBuild: ClangCL"
+            "configurePreset": "ClangCL: Visual Studio 17 2022"
         },
         {
-            "name": "MSBuild: ClangCL (Release)",
+            "name": "ClangCL: Visual Studio 17 2022 (Release)",
             "inherits": ["MSBuild Options"],
             "configuration": "Release",
-            "configurePreset": "MSBuild: ClangCL"
+            "configurePreset": "ClangCL: Visual Studio 17 2022"
         },
         {
-            "name": "Ninja MSVC Debug",
+            "name": "ClangCL: Ninja (Debug)",
             "configuration": "Debug",
-            "configurePreset": "Ninja: MSVC"
+            "configurePreset": "ClangCL: Ninja"
         },
         {
-            "name": "Ninja MSVC Release",
+            "name": "ClangCL: Ninja (Release)",
             "configuration": "Release",
-            "configurePreset": "Ninja: MSVC"
+            "configurePreset": "ClangCL: Ninja"
         },
         {
-            "name": "Ninja ClangCL Debug",
+            "name": "ClangCL: Ninja Multi-Config (Debug)",
             "configuration": "Debug",
-            "configurePreset": "Ninja: ClangCL"
+            "configurePreset": "ClangCL: Ninja Multi-Config"
         },
         {
-            "name": "Ninja ClangCL Release",
+            "name": "ClangCL: Ninja Multi-Config (Release)",
             "configuration": "Release",
-            "configurePreset": "Ninja: ClangCL"
+            "configurePreset": "ClangCL: Ninja Multi-Config"
         },
         {
             "name": "Ninja Clang Debug",
