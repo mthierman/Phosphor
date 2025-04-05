@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.30)
-project(Phosphor VERSION 0.0.1)
+cmake_minimum_required(VERSION 3.31)
+project(phosphor)
 list(
     APPEND
     CMAKE_MODULE_PATH

@@ -1,6 +1,6 @@
 #include <Windows.h>
-#include <print>
 #include <cstdlib>
+// #include <print>
 
 auto CALLBACK window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     // if (msg == WM_NCCREATE) {
@@ -13,13 +13,16 @@ auto CALLBACK window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam
     // }
 
     if (msg == WM_SETTINGCHANGE) {
-        std::println("WM_SETTINGCHANGE");
+        // std::println("WM_SETTINGCHANGE");
     }
 
     return DefWindowProcW(hwnd, msg, wparam, lparam);
 }
 
-auto wmain(int /* argc */, wchar_t* /* argv */[], wchar_t* /* envp */[]) -> int {
+auto wWinMain(HINSTANCE /* hinstance */,
+              HINSTANCE /* hprevinstance */,
+              PWSTR /* pcmdline */,
+              int /* ncmdshow */) -> int {
     auto instance = []() -> HMODULE {
         HMODULE hmodule;
 

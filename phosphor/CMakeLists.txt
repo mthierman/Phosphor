@@ -5,30 +5,23 @@ list(
     CMAKE_MODULE_PATH
     "${CMAKE_CURRENT_SOURCE_DIR}/libs"
     )
-# include(config) include(webview2) include(wil) include(cppwinrt) include(ada) include(glaze)
 include(pane)
 add_executable(
     phosphor
     WIN32
     )
 target_sources(
-    phosphor
-    PRIVATE "src/win32.cxx"
-            "data/phosphor.rc"
+    phosphor PRIVATE "src/phosphor.cxx"
+                     # "data/phosphor.rc"
     )
 target_link_libraries(
     phosphor
-    PRIVATE pane::pane
-            pane::config
+    PRIVATE pane
+            pane_config
     )
-add_executable(phosphor_console)
-target_sources(
-    phosphor_console
-    PRIVATE "src/console.cxx"
-            "data/phosphor.rc"
+target_compile_features(
+    phosphor
+    PRIVATE c_std_17
+            cxx_std_23
     )
-target_link_libraries(
-    phosphor_console
-    PRIVATE pane::pane
-            pane::config
-    )
+# target_compile_definitions( phosphor PRIVATE UNICODE WIN32_LEAN_AND_MEAN NOMINMAX GDIPVER=0x0110 )
