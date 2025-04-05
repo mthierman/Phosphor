@@ -19,6 +19,10 @@
             "architecture": {
                 "strategy": "set",
                 "value": "x64"
+            },
+            "toolset": {
+                "strategy": "set",
+                "value": "host=x64"
             }
         },
         {
@@ -32,23 +36,19 @@
             "generator": "Ninja Multi-Config"
         },
         {
-            "name": "MSBuild: MSVC",
-            "inherits": ["Visual Studio 17 2022"],
-            "toolset": {
-                "strategy": "set",
-                "value": "host=x64"
+            "name": "MSVC: MSBuild",
+            "inherits": ["Visual Studio 17 2022"]
+        },
+        {
+            "name": "MSVC: Ninja",
+            "inherits": ["Ninja"],
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "cl",
+                "CMAKE_CXX_COMPILER": "cl"
             }
         },
         {
-            "name": "MSBuild: ClangCL",
-            "inherits": ["Visual Studio 17 2022"],
-            "toolset": {
-                "strategy": "set",
-                "value": "ClangCL,host=x64"
-            }
-        },
-        {
-            "name": "Ninja: MSVC",
+            "name": "MSVC: Ninja Multi-Config",
             "inherits": ["Ninja Multi-Config"],
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "cl",
@@ -56,7 +56,23 @@
             }
         },
         {
-            "name": "Ninja: ClangCL",
+            "name": "ClangCL: MSBuild",
+            "inherits": ["Visual Studio 17 2022"],
+            "toolset": {
+                "strategy": "set",
+                "value": "ClangCL,host=x64"
+            }
+        },
+        {
+            "name": "ClangCL: Ninja",
+            "inherits": ["Ninja"],
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang-cl",
+                "CMAKE_CXX_COMPILER": "clang-cl"
+            }
+        },
+        {
+            "name": "ClangCL: Ninja Multi-Config",
             "inherits": ["Ninja Multi-Config"],
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "clang-cl",
@@ -64,7 +80,15 @@
             }
         },
         {
-            "name": "Ninja: Clang",
+            "name": "Clang: Ninja",
+            "inherits": ["Ninja"],
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++"
+            }
+        },
+        {
+            "name": "Clang: Ninja Multi-Config",
             "inherits": ["Ninja Multi-Config"],
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "clang",
@@ -92,25 +116,25 @@
             ]
         },
         {
-            "name": "MSVC Debug",
+            "name": "MSBuild: MSVC (Debug)",
             "inherits": ["MSBuild Options"],
             "configuration": "Debug",
             "configurePreset": "MSBuild: MSVC"
         },
         {
-            "name": "MSVC Release",
+            "name": "MSBuild: MSVC (Release)",
             "inherits": ["MSBuild Options"],
             "configuration": "Release",
             "configurePreset": "MSBuild: MSVC"
         },
         {
-            "name": "ClangCL Debug",
+            "name": "MSBuild: ClangCL (Debug)",
             "inherits": ["MSBuild Options"],
             "configuration": "Debug",
             "configurePreset": "MSBuild: ClangCL"
         },
         {
-            "name": "ClangCL Release",
+            "name": "MSBuild: ClangCL (Release)",
             "inherits": ["MSBuild Options"],
             "configuration": "Release",
             "configurePreset": "MSBuild: ClangCL"
