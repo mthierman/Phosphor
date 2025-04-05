@@ -2,6 +2,14 @@
 #include <cstdlib>
 #include <print>
 
+auto CALLBACK window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
+    if (msg == WM_SETTINGCHANGE) {
+        std::println("WM_SETTINGCHANGE");
+    }
+
+    return DefWindowProcW(hwnd, msg, wparam, lparam);
+}
+
 auto make_window() -> void {
     auto instance = []() -> HMODULE {
         HMODULE hmodule;
@@ -58,14 +66,6 @@ auto make_window() -> void {
                                                    nullptr) };
 
     ShowWindow(window, SW_SHOWNORMAL);
-}
-
-auto CALLBACK window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
-    if (msg == WM_SETTINGCHANGE) {
-        std::println("WM_SETTINGCHANGE");
-    }
-
-    return DefWindowProcW(hwnd, msg, wparam, lparam);
 }
 
 auto wWinMain(HINSTANCE /* hinstance */,
