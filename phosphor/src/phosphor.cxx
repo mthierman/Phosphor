@@ -5,6 +5,12 @@
 #include <wil/com.h>
 #include <pane/pane.hxx>
 
+struct Settings {
+    enum Theme { Light = 0, Dark };
+
+    Theme theme { Theme::Dark };
+};
+
 auto CALLBACK window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
         std::println("WM_SETTINGCHANGE");
@@ -71,15 +77,14 @@ auto make_window() -> void {
     ShowWindow(window, SW_SHOWNORMAL);
 }
 
-enum Theme { Light = 0, Dark };
-
 auto wWinMain(HINSTANCE /* hinstance */,
               HINSTANCE /* hprevinstance */,
               PWSTR /* pcmdline */,
               int /* ncmdshow */) -> int {
     auto co_init { pane::co_init::apartment_threaded() };
 
-    // auto theme { Theme::Dark };
+    auto settings { Settings() };
+
     auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
                                                                       CLSCTX_ALL) };
 
