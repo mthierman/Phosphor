@@ -8,11 +8,6 @@
     },
     "configurePresets": [
         {
-            "name": "Common",
-            "hidden": true,
-            "binaryDir": "build"
-        },
-        {
             "name": "Visual Studio 17 2022",
             "hidden": true,
             "generator": "Visual Studio 17 2022",
