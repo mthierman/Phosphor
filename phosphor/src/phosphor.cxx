@@ -42,8 +42,8 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
         }
 
         if (pictures_directory) {
-            auto dark { pictures_directory.value() / u"dark.jpg" };
-            auto light { pictures_directory.value() / u"light.jpg" };
+            auto dark { pictures_directory.value() / u"Wallpapers" / u"dark.jpg" };
+            auto light { pictures_directory.value() / u"Wallpapers" / u"light.jpg" };
 
             switch (settings.theme) {
                 case Theme::Dark: {
