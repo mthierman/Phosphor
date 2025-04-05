@@ -20,10 +20,9 @@ struct Settings {
 
 auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
+        pane::debug(u8"WM_SETTINGCHANGE");
+
         auto settings { Settings() };
-
-        auto pictures_directory { pane::filesystem::known_folder(FOLDERID_Pictures) };
-
         auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
                                                                           CLSCTX_ALL) };
         UINT count;
@@ -34,16 +33,18 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
 
         switch (pane::color(winrt::UIColorType::Background).is_dark()) {
             case true: {
+                pane::debug(u8"DARK");
                 settings.theme = Theme::Dark;
             } break;
             case false: {
+                pane::debug(u8"LIGHT");
                 settings.theme = Theme::Light;
             } break;
         }
 
-        if (pictures_directory) {
-            auto dark { pictures_directory.value() / u"Wallpapers" / u"dark.jpg" };
-            auto light { pictures_directory.value() / u"Wallpapers" / u"light.jpg" };
+        if (auto pictures_directory { pane::filesystem::known_folder(FOLDERID_Pictures) }) {
+            auto dark { pictures_directory.value() / u"Wallpapers" / u"dark.png" };
+            auto light { pictures_directory.value() / u"Wallpapers" / u"light.png" };
 
             switch (settings.theme) {
                 case Theme::Dark: {
