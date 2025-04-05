@@ -115,7 +115,7 @@ auto make_window() -> void {
                                                    window_class.hInstance,
                                                    nullptr) };
 
-    ShowWindow(window, SW_SHOWNORMAL);
+    // ShowWindow(window, SW_SHOWNORMAL);
 }
 
 auto wWinMain(HINSTANCE /* hinstance */,
