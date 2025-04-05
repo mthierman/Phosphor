@@ -1,6 +1,9 @@
 #include <Windows.h>
+#include <ShObjIdl.h>
 #include <cstdlib>
 #include <print>
+#include <wil/com.h>
+#include <pane/pane.hxx>
 
 auto CALLBACK window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
@@ -72,6 +75,9 @@ auto wWinMain(HINSTANCE /* hinstance */,
               HINSTANCE /* hprevinstance */,
               PWSTR /* pcmdline */,
               int /* ncmdshow */) -> int {
+    auto co_init { pane::co_init::apartment_threaded() };
+    wil::com_ptr<IDesktopWallpaper> m_wallpaper;
+
     make_window();
 
     MSG msg {};
