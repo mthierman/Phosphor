@@ -1,11 +1,10 @@
-# file( DOWNLOAD "https://aka.ms/vs/17/release/vc_redist.x64.exe"
-# "${PROJECT_BINARY_DIR}/vc_redist.x64.exe" )
 list(
     APPEND
     CMAKE_MODULE_PATH
     "${CMAKE_CURRENT_SOURCE_DIR}/libs"
     )
 include(pane)
+include(download_vcredist)
 add_executable(
     phosphor
     WIN32
