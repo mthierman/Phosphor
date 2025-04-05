@@ -11,17 +11,12 @@ add_executable(
     WIN32
     )
 target_sources(
-    phosphor PRIVATE "src/phosphor.cxx"
-                     # "data/phosphor.rc"
+    phosphor
+    PRIVATE "src/phosphor.cxx"
+            "data/phosphor.rc"
     )
 target_link_libraries(
     phosphor
-    PRIVATE pane
-            pane_config
+    PRIVATE pane::pane
+            pane::config
     )
-target_compile_features(
-    phosphor
-    PRIVATE c_std_17
-            cxx_std_23
-    )
-# target_compile_definitions( phosphor PRIVATE UNICODE WIN32_LEAN_AND_MEAN NOMINMAX GDIPVER=0x0110 )
