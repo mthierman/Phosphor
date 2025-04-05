@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+    xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://wixtoolset.org/schemas/v4/wxs https://raw.githubusercontent.com/wixtoolset/web/master/src/xsd4/wix.xsd
+                        http://wixtoolset.org/schemas/v4/wxs/bal https://raw.githubusercontent.com/wixtoolset/web/master/src/xsd4/bal.xsd">
+    <Bundle Name="Phosphor" Version="0.0.1" UpgradeCode="01CC4C17-165F-43A9-BA1D-D428B9FBE172"
+        IconSourceFile="data/icon.ico" AboutUrl="https://github.com/mthierman/Phosphor"
+        Copyright="© 2023 Mike Thierman" Manufacturer="Mike Thierman">
+        <BootstrapperApplication>
+            <bal:WixStandardBootstrapperApplication Theme="rtfLicense"
+                LicenseFile="data/installer/LICENSE.rtf"
+                ShowVersion="yes" LogoSideFile="data/icon.png"
+                LogoFile="data/icon.png" SuppressOptionsUI="true" />
+        </BootstrapperApplication>
+        <Chain>
+            <BundlePackage SourceFile="build/VC_redist.x64.exe"
+                bal:PrereqLicenseUrl="https://visualstudio.microsoft.com/license-terms/vs2022-cruntime/"
+                InstallArguments="/install /passive /quiet /norestart" Permanent="yes"
+                bal:PrereqPackage="yes" />
+            <MsiPackage bal:PrimaryPackageType="default" SourceFile="build/Phosphor.msi" />
+        </Chain>
+    </Bundle>
+</Wix>
