@@ -20,16 +20,17 @@ struct Settings {
 
 auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
+        auto settings { Settings() };
+
+        auto pictures_directory { pane::filesystem::known_folder(FOLDERID_Pictures) };
+
         auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
                                                                           CLSCTX_ALL) };
         UINT count;
         LPWSTR monitor;
+
         desktop_wallpaper->GetMonitorDevicePathCount(&count);
         desktop_wallpaper->GetMonitorDevicePathAt(0, &monitor);
-
-        auto settings { Settings() };
-
-        auto pictures_directory { pane::filesystem::known_folder(FOLDERID_Pictures) };
 
         switch (pane::color(winrt::UIColorType::Background).is_dark()) {
             case true: {
