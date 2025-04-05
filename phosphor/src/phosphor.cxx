@@ -71,12 +71,17 @@ auto make_window() -> void {
     ShowWindow(window, SW_SHOWNORMAL);
 }
 
+enum Theme { Light = 0, Dark };
+
 auto wWinMain(HINSTANCE /* hinstance */,
               HINSTANCE /* hprevinstance */,
               PWSTR /* pcmdline */,
               int /* ncmdshow */) -> int {
     auto co_init { pane::co_init::apartment_threaded() };
-    wil::com_ptr<IDesktopWallpaper> m_wallpaper;
+
+    // auto theme { Theme::Dark };
+    auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
+                                                                      CLSCTX_ALL) };
 
     make_window();
 
