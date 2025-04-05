@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <ShObjIdl.h>
+#include <filesystem>
 #include <cstdlib>
 #include <utility>
 #include <print>
@@ -25,6 +26,16 @@ struct Settings {
 
     auto save() -> void;
     auto load() -> void;
+
+    // private:
+    std::filesystem::path config_file {
+        pane::filesystem::known_folder()
+            .transform([](const std::filesystem::path& path) -> std::filesystem::path {
+        return path / u"Phosphor";
+    }).value_or(u"")
+    };
+    std::filesystem::path dark;
+    std::filesystem::path light
 };
 
 auto Settings::save() -> void { }
@@ -35,6 +46,8 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
         // pane::debug(u8"WM_SETTINGCHANGE");
 
         auto settings { Settings() };
+        pane::debug(settings.config_file.u8string());
+
         auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
                                                                           CLSCTX_ALL) };
         UINT count;
