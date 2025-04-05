@@ -13,16 +13,22 @@ namespace winrt {
 using namespace winrt::Windows::UI::ViewManagement;
 }; // namespace winrt
 
-enum struct Theme { Light = 0, Dark };
-// Register Theme enum as strings for glaze
-// template <> struct glz::meta<Theme> {
-//     using enum Theme;
-//     static constexpr auto value = enumerate(Light, Dark);
+enum struct theme { light = 0, dark };
+// Register as strings for glaze
+// template <> struct glz::meta<theme> {
+//     using enum theme;
+//     static constexpr auto value = enumerate(light, dark);
 // };
 
 struct Settings {
-    Theme theme { Theme::Dark };
+    theme theme { theme::dark };
+
+    auto save() -> void;
+    auto load() -> void;
 };
+
+auto Settings::save() -> void { }
+auto Settings::load() -> void { }
 
 auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
@@ -40,11 +46,11 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
         switch (pane::color(winrt::UIColorType::Background).is_dark()) {
             case true: {
                 // pane::debug(u8"DARK");
-                settings.theme = Theme::Dark;
+                settings.theme = theme::dark;
             } break;
             case false: {
                 // pane::debug(u8"LIGHT");
-                settings.theme = Theme::Light;
+                settings.theme = theme::light;
             } break;
         }
 
@@ -53,10 +59,10 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
             auto light { pictures_directory.value() / u"Wallpapers" / u"light.png" };
 
             switch (settings.theme) {
-                case Theme::Dark: {
+                case theme::dark: {
                     desktop_wallpaper->SetWallpaper(0, dark.c_str());
                 } break;
-                case Theme::Light: {
+                case theme::light: {
                     desktop_wallpaper->SetWallpaper(0, light.c_str());
                 } break;
             }
