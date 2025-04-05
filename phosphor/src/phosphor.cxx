@@ -1,28 +1,8 @@
 #include <Windows.h>
 #include <cstdlib>
-// #include <print>
+#include <print>
 
-auto CALLBACK window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
-    // if (msg == WM_NCCREATE) {
-    //     auto create { reinterpret_cast<CREATESTRUCTW*>(lparam) };
-
-    //     if (auto self { static_cast<Self*>(create->lpCreateParams) }; self) {
-    //         SetWindowLongPtrW(hwnd, 0, reinterpret_cast<LONG_PTR>(self));
-    //         self->window_handle = hwnd;
-    //     }
-    // }
-
-    if (msg == WM_SETTINGCHANGE) {
-        // std::println("WM_SETTINGCHANGE");
-    }
-
-    return DefWindowProcW(hwnd, msg, wparam, lparam);
-}
-
-auto wWinMain(HINSTANCE /* hinstance */,
-              HINSTANCE /* hprevinstance */,
-              PWSTR /* pcmdline */,
-              int /* ncmdshow */) -> int {
+auto make_window() -> void {
     auto instance = []() -> HMODULE {
         HMODULE hmodule;
 
@@ -77,7 +57,22 @@ auto wWinMain(HINSTANCE /* hinstance */,
                                                    window_class.hInstance,
                                                    nullptr) };
 
-    // ShowWindow(window, SW_SHOWNORMAL);
+    ShowWindow(window, SW_SHOWNORMAL);
+}
+
+auto CALLBACK window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
+    if (msg == WM_SETTINGCHANGE) {
+        std::println("WM_SETTINGCHANGE");
+    }
+
+    return DefWindowProcW(hwnd, msg, wparam, lparam);
+}
+
+auto wWinMain(HINSTANCE /* hinstance */,
+              HINSTANCE /* hprevinstance */,
+              PWSTR /* pcmdline */,
+              int /* ncmdshow */) -> int {
+    make_window();
 
     MSG msg {};
     int r {};
