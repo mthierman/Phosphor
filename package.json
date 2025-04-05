@@ -1,0 +1,9 @@
+{
+    "name": "phosphor",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "devDependencies": {
+        "prettier": "^3.5.3"
+    }
+}
