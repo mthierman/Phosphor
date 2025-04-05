@@ -114,88 +114,92 @@
             ]
         },
         {
+            "name": "Debug",
+            "configuration": "Debug"
+        },
+        {
+            "name": "Release",
+            "configuration": "Release"
+        },
+        {
             "name": "CL: Visual Studio 17 2022 (Debug)",
-            "inherits": ["MSBuild Options"],
-            "configuration": "Debug",
-            "configurePreset": "CL: Visual Studio 17 2022"
+            "configurePreset": "CL: Visual Studio 17 2022",
+            "inherits": ["MSBuild Options", "Debug"]
         },
         {
             "name": "CL: Visual Studio 17 2022 (Release)",
-            "inherits": ["MSBuild Options"],
-            "configuration": "Release",
-            "configurePreset": "CL: Visual Studio 17 2022"
+            "configurePreset": "CL: Visual Studio 17 2022",
+            "inherits": ["MSBuild Options", "Release"]
         },
         {
             "name": "CL: Ninja (Debug)",
-            "configuration": "Debug",
-            "configurePreset": "CL: Ninja"
+            "configurePreset": "CL: Ninja",
+            "inherits": ["Debug"]
         },
         {
             "name": "CL: Ninja (Release)",
-            "configuration": "Release",
-            "configurePreset": "CL: Ninja"
+            "configurePreset": "CL: Ninja",
+            "inherits": ["Release"]
         },
         {
             "name": "CL: Ninja Multi-Config (Debug)",
-            "configuration": "Debug",
-            "configurePreset": "CL: Ninja Multi-Config"
+            "configurePreset": "CL: Ninja Multi-Config",
+            "inherits": ["Debug"]
         },
         {
             "name": "CL: Ninja Multi-Config (Release)",
-            "configuration": "Release",
-            "configurePreset": "CL: Ninja Multi-Config"
+            "configurePreset": "CL: Ninja Multi-Config",
+            "inherits": ["Release"]
         },
         {
             "name": "ClangCL: Visual Studio 17 2022 (Debug)",
-            "inherits": ["MSBuild Options"],
-            "configuration": "Debug",
-            "configurePreset": "ClangCL: Visual Studio 17 2022"
+            "configurePreset": "ClangCL: Visual Studio 17 2022",
+            "inherits": ["MSBuild Options", "Debug"]
         },
         {
             "name": "ClangCL: Visual Studio 17 2022 (Release)",
-            "inherits": ["MSBuild Options"],
-            "configuration": "Release",
-            "configurePreset": "ClangCL: Visual Studio 17 2022"
+            "configurePreset": "ClangCL: Visual Studio 17 2022",
+            "inherits": ["MSBuild Options", "Release"]
         },
         {
             "name": "ClangCL: Ninja (Debug)",
-            "configuration": "Debug",
-            "configurePreset": "ClangCL: Ninja"
+            "configurePreset": "ClangCL: Ninja",
+            "inherits": ["Debug"]
         },
         {
             "name": "ClangCL: Ninja (Release)",
-            "configuration": "Release",
-            "configurePreset": "ClangCL: Ninja"
+            "configurePreset": "ClangCL: Ninja",
+            "inherits": ["Release"]
         },
         {
             "name": "ClangCL: Ninja Multi-Config (Debug)",
-            "configuration": "Debug",
-            "configurePreset": "ClangCL: Ninja Multi-Config"
+            "configurePreset": "ClangCL: Ninja Multi-Config",
+            "inherits": ["Debug"]
         },
         {
             "name": "ClangCL: Ninja Multi-Config (Release)",
-            "configuration": "Release",
-            "configurePreset": "ClangCL: Ninja Multi-Config"
+            "configurePreset": "ClangCL: Ninja Multi-Config",
+            "inherits": ["Release"]
         },
         {
             "name": "Clang: Ninja (Debug)",
-            "configuration": "Debug",
-            "configurePreset": "Clang: Ninja"
+            "configurePreset": "Clang: Ninja",
+            "inherits": ["Debug"]
         },
         {
             "name": "Clang: Ninja (Release)",
-            "configuration": "Release",
-            "configurePreset": "Clang: Ninja"
+            "configurePreset": "Clang: Ninja",
+            "inherits": ["Release"]
         },
         {
             "name": "Clang: Ninja Multi-Config (Debug)",
-            "configuration": "Debug",
-            "configurePreset": "Clang: Ninja Multi-Config"
+            "configurePreset": "Clang: Ninja Multi-Config",
+            "inherits": ["Debug"]
         },
         {
             "name": "Clang: Ninja Multi-Config (Release)",
-            "configuration": "Release",
-            "configurePreset": "Clang: Ninja Multi-Config"
+            "configurePreset": "Clang: Ninja Multi-Config",
+            "inherits": ["Release"]
         }
     ]
 }
