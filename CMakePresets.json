@@ -180,14 +180,24 @@
             "configurePreset": "ClangCL: Ninja Multi-Config"
         },
         {
-            "name": "Ninja Clang Debug",
+            "name": "Clang: Ninja (Debug)",
             "configuration": "Debug",
-            "configurePreset": "Ninja: Clang"
+            "configurePreset": "Clang: Ninja"
         },
         {
-            "name": "Ninja Clang Release",
+            "name": "Clang: Ninja (Release)",
             "configuration": "Release",
-            "configurePreset": "Ninja: Clang"
+            "configurePreset": "Clang: Ninja"
+        },
+        {
+            "name": "Clang: Ninja Multi-Config (Debug)",
+            "configuration": "Debug",
+            "configurePreset": "Clang: Ninja Multi-Config"
+        },
+        {
+            "name": "Clang: Ninja Multi-Config (Release)",
+            "configuration": "Release",
+            "configurePreset": "Clang: Ninja Multi-Config"
         }
     ]
 }
