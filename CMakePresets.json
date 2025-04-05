@@ -8,6 +8,11 @@
     },
     "configurePresets": [
         {
+            "name": "Common",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/build"
+        },
+        {
             "name": "Visual Studio 17 2022",
             "hidden": true,
             "generator": "Visual Studio 17 2022",
@@ -27,8 +32,7 @@
             "toolset": {
                 "strategy": "set",
                 "value": "host=x64"
-            },
-            "binaryDir": "${sourceDir}/build/Visual Studio 17 2022/MSVC"
+            }
         },
         {
             "name": "MSBuild: ClangCL",
@@ -36,8 +40,7 @@
             "toolset": {
                 "strategy": "set",
                 "value": "ClangCL,host=x64"
-            },
-            "binaryDir": "${sourceDir}/build/Visual Studio 17 2022/ClangCL"
+            }
         },
         {
             "name": "Ninja: MSVC",
@@ -45,8 +48,7 @@
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "cl",
                 "CMAKE_CXX_COMPILER": "cl"
-            },
-            "binaryDir": "${sourceDir}/build/Ninja Multi-Config/MSVC"
+            }
         },
         {
             "name": "Ninja: ClangCL",
@@ -54,8 +56,7 @@
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "clang-cl",
                 "CMAKE_CXX_COMPILER": "clang-cl"
-            },
-            "binaryDir": "${sourceDir}/build/Ninja Multi-Config/ClangCL"
+            }
         },
         {
             "name": "Ninja: Clang",
@@ -63,8 +64,7 @@
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "clang",
                 "CMAKE_CXX_COMPILER": "clang++"
-            },
-            "binaryDir": "${sourceDir}/build/Ninja Multi-Config/Clang"
+            }
         },
         {
             "name": "Unity Build",
