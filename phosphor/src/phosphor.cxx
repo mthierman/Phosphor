@@ -8,18 +8,11 @@
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.UI.ViewManagement.h>
 #include <pane/pane.hxx>
-#include <glaze/glaze.hpp>
+#include "config.hxx"
 
 namespace winrt {
 using namespace winrt::Windows::UI::ViewManagement;
 }; // namespace winrt
-
-enum struct theme { light = 0, dark };
-// Register as strings for glaze
-// template <> struct glz::meta<theme> {
-//     using enum theme;
-//     static constexpr auto value = enumerate(light, dark);
-// };
 
 struct Settings {
     theme theme { theme::dark };
@@ -27,15 +20,7 @@ struct Settings {
     auto save() -> void;
     auto load() -> void;
 
-    // private:
-    std::filesystem::path config_file {
-        pane::filesystem::known_folder()
-            .transform([](const std::filesystem::path& path) -> std::filesystem::path {
-        return path / u"Phosphor";
-    }).value_or(u"")
-    };
-    std::filesystem::path dark;
-    std::filesystem::path light
+
 };
 
 auto Settings::save() -> void { }
