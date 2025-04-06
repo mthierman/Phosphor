@@ -15,9 +15,10 @@ namespace winrt {
 using namespace winrt::Windows::UI::ViewManagement;
 }; // namespace winrt
 
+auto config { phosphor::config() };
+
 auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
-        auto config { phosphor::config() };
         auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
                                                                           CLSCTX_ALL) };
         UINT count;
