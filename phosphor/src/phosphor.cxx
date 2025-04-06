@@ -19,6 +19,8 @@ auto config { phosphor::config() };
 
 auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
+        config.load();
+
         auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
                                                                           CLSCTX_ALL) };
         UINT count;
@@ -42,6 +44,7 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
                 desktop_wallpaper->SetWallpaper(0, config.settings.dark.c_str());
             } break;
             case phosphor::theme::light: {
+                pane::debug(config.settings.light);
                 desktop_wallpaper->SetWallpaper(0, config.settings.light.c_str());
             } break;
         }
