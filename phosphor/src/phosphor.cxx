@@ -44,8 +44,6 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
                 desktop_wallpaper->SetWallpaper(0, config.settings.light.c_str());
             } break;
         }
-
-        config.save();
     }
 
     return DefWindowProcW(hwnd, msg, wparam, lparam);
@@ -133,7 +131,7 @@ auto wWinMain(HINSTANCE /* hinstance */,
         }
     }
 
-    config.save();
+    // config.save();
 
     return static_cast<int>(msg.wParam);
 }
