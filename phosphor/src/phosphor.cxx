@@ -15,14 +15,14 @@ namespace winrt {
 using namespace winrt::Windows::UI::ViewManagement;
 }; // namespace winrt
 
-auto config { phosphor::config() };
-auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
-                                                                  CLSCTX_ALL) };
-UINT count;
-LPWSTR monitor;
-
 auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
+        auto config { phosphor::config() };
+        auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
+                                                                          CLSCTX_ALL) };
+        UINT count;
+        LPWSTR monitor;
+
         desktop_wallpaper->GetMonitorDevicePathCount(&count);
         desktop_wallpaper->GetMonitorDevicePathAt(0, &monitor);
 
