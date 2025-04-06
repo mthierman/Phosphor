@@ -15,7 +15,7 @@ enum struct theme { light = 0, dark };
 struct config final {
     using Self = config;
 
-    config() = default;
+    config();
     ~config() = default;
 
     config(const Self& color) = default;
@@ -24,13 +24,6 @@ struct config final {
     auto operator=(Self&& color) noexcept -> Self& = default;
 
     theme theme { theme::dark };
-    std::unordered_map<std::filesystem::path> paths;
-
-    std::filesystem::path config_file {
-        pane::filesystem::known_folder()
-            .transform([](const std::filesystem::path& path) -> std::filesystem::path {
-        return path / u"Phosphor";
-    }).value_or(u"")
-    };
+    std::unordered_map<std::u8string, std::filesystem::path> paths;
 };
 } // namespace phosphor
