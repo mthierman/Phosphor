@@ -18,23 +18,17 @@ config::config() {
 }
 
 auto config::load(this const Self& self) -> void {
-    // pane::filesystem::open_file();
-
-    // auto config_file { pane::filesystem::open_file(self.paths.at(u8"config_file")) };
-    // if (config_file) {
-    //     auto conf { config_file.value().get() };
-    // }
-
     phosphor::settings settings;
+
     std::string buffer;
+
     auto ec { glz::read_file_json(
         settings,
         reinterpret_cast<const char*>(self.paths.at(u8"config_file").u8string().data()),
         buffer) };
 
-    // pane::debug("{}", buffer);
     pane::debug(buffer.data());
 }
 
-// auto config::save(this const Self& self) -> void { }
+auto config::save(this const Self& self) -> void { }
 } // namespace phosphor

@@ -28,7 +28,7 @@ struct config final {
     auto operator=(Self&& color) noexcept -> Self& = default;
 
     auto load(this const Self& self) -> void;
-    // auto save(this const Self& self) -> void;
+    auto save(this const Self& self) -> void;
 
     std::unordered_map<std::u8string, std::filesystem::path> paths;
     phosphor::settings settings;
