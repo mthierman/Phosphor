@@ -6,7 +6,7 @@ config::config() {
         u8"config_file",
         pane::filesystem::known_folder()
             .transform([](const std::filesystem::path& path) -> std::filesystem::path {
-        return path / u"Phosphor";
+        return path / u"Phosphor" / u"config.json";
     }).value_or(u""));
 
     paths.try_emplace(
@@ -30,7 +30,10 @@ auto config::load(this const Self& self) -> void {
     auto ec { glz::read_file_json(
         settings,
         reinterpret_cast<const char*>(self.paths.at(u8"config_file").u8string().data()),
-        std::string {}) };
+        buffer) };
+
+    // pane::debug("{}", buffer);
+    pane::debug(buffer.data());
 }
 
 // auto config::save(this const Self& self) -> void { }
