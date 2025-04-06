@@ -137,7 +137,7 @@ auto wWinMain(HINSTANCE /* hinstance */,
         }
     }
 
-    config.save();
+    // config.save();
 
     return static_cast<int>(msg.wParam);
 }
