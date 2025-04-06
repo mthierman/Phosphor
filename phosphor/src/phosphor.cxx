@@ -8,30 +8,19 @@
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.UI.ViewManagement.h>
 #include <pane/pane.hxx>
+#include <glaze/glaze.hpp>
 #include "config.hxx"
 
 namespace winrt {
 using namespace winrt::Windows::UI::ViewManagement;
 }; // namespace winrt
 
-struct Settings {
-    theme theme { theme::dark };
-
-    auto save() -> void;
-    auto load() -> void;
-
-
-};
-
-auto Settings::save() -> void { }
-auto Settings::load() -> void { }
-
 auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
         // pane::debug(u8"WM_SETTINGCHANGE");
 
-        auto settings { Settings() };
-        pane::debug(settings.config_file.u8string());
+        auto config { phosphor::config() };
+        pane::debug(config.paths.at(u8"config_file").u8string());
 
         auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
                                                                           CLSCTX_ALL) };
@@ -44,11 +33,11 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
         switch (pane::color(winrt::UIColorType::Background).is_dark()) {
             case true: {
                 // pane::debug(u8"DARK");
-                settings.theme = theme::dark;
+                config.theme = phosphor::theme::dark;
             } break;
             case false: {
                 // pane::debug(u8"LIGHT");
-                settings.theme = theme::light;
+                config.theme = phosphor::theme::light;
             } break;
         }
 
@@ -56,18 +45,18 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
             auto dark { pictures_directory.value() / u"Wallpapers" / u"dark.png" };
             auto light { pictures_directory.value() / u"Wallpapers" / u"light.png" };
 
-            switch (settings.theme) {
-                case theme::dark: {
+            switch (config.theme) {
+                case phosphor::theme::dark: {
                     desktop_wallpaper->SetWallpaper(0, dark.c_str());
                 } break;
-                case theme::light: {
+                case phosphor::theme::light: {
                     desktop_wallpaper->SetWallpaper(0, light.c_str());
                 } break;
             }
         }
 
         std::u8string buffer;
-        auto json { glz::write_json(settings.theme, buffer) };
+        auto json { glz::write_json(config.theme, buffer) };
         pane::debug(buffer);
     }
 
