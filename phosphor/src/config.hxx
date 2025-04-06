@@ -13,7 +13,8 @@ enum struct theme { light = 0, dark };
 // };
 
 struct settings final {
-    phosphor::theme theme { phosphor::theme::dark };
+    std::filesystem::path dark;
+    std::filesystem::path light;
 };
 
 struct config final {
@@ -32,5 +33,6 @@ struct config final {
 
     std::unordered_map<std::u8string, std::filesystem::path> paths;
     phosphor::settings settings;
+    phosphor::theme theme { phosphor::theme::dark };
 };
 } // namespace phosphor
