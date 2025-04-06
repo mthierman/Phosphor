@@ -10,17 +10,10 @@ config::config() {
     }).value_or(u""));
 
     paths.try_emplace(
-        u8"dark",
+        u8"wallpapers",
         pane::filesystem::known_folder(FOLDERID_Pictures)
             .transform([](const std::filesystem::path& path) -> std::filesystem::path {
-        return path / u"Wallpapers" / u"dark.png";
-    }).value_or(u""));
-
-    paths.try_emplace(
-        u8"light",
-        pane::filesystem::known_folder(FOLDERID_Pictures)
-            .transform([](const std::filesystem::path& path) -> std::filesystem::path {
-        return path / u"Wallpapers" / u"light.png";
+        return path / u"Wallpapers";
     }).value_or(u""));
 }
 } // namespace phosphor

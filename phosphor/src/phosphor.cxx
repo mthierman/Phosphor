@@ -28,32 +28,27 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
 
         switch (pane::color(winrt::UIColorType::Background).is_dark()) {
             case true: {
-                // pane::debug(u8"DARK");
                 config.theme = phosphor::theme::dark;
             } break;
             case false: {
-                // pane::debug(u8"LIGHT");
                 config.theme = phosphor::theme::light;
             } break;
         }
 
-        if (auto pictures_directory { pane::filesystem::known_folder(FOLDERID_Pictures) }) {
-            auto dark { pictures_directory.value() / u"Wallpapers" / u"dark.png" };
-            auto light { pictures_directory.value() / u"Wallpapers" / u"light.png" };
+        auto dark { config.paths.at(u8"wallpapers") / u"dark.png" };
+        auto light { config.paths.at(u8"wallpapers") / u"light.png" };
 
-            switch (config.theme) {
-                case phosphor::theme::dark: {
-                    desktop_wallpaper->SetWallpaper(0, dark.c_str());
-                } break;
-                case phosphor::theme::light: {
-                    desktop_wallpaper->SetWallpaper(0, light.c_str());
-                } break;
-            }
+        switch (config.theme) {
+            case phosphor::theme::dark: {
+                desktop_wallpaper->SetWallpaper(0, dark.c_str());
+            } break;
+            case phosphor::theme::light: {
+                desktop_wallpaper->SetWallpaper(0, light.c_str());
+            } break;
         }
 
-        std::u8string buffer;
-        auto json { glz::write_json(config.theme, buffer) };
-        // pane::debug(buffer);
+        // std::u8string buffer;
+        // auto json { glz::write_json(config.theme, buffer) };
     }
 
     return DefWindowProcW(hwnd, msg, wparam, lparam);
