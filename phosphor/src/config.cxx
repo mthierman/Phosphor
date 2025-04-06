@@ -16,4 +16,6 @@ config::config() {
         return path / u"Wallpapers";
     }).value_or(u""));
 }
+
+auto config::load() -> void { }
 } // namespace phosphor

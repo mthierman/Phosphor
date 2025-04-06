@@ -23,6 +23,8 @@ struct config final {
     config(Self&& color) noexcept = default;
     auto operator=(Self&& color) noexcept -> Self& = default;
 
+    auto load() -> void;
+
     theme theme { theme::dark };
     std::unordered_map<std::u8string, std::filesystem::path> paths;
 };
