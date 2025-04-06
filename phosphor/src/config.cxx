@@ -18,4 +18,6 @@ config::config() {
 }
 
 auto config::load() -> void { }
+
+auto config::save() -> void { }
 } // namespace phosphor

@@ -24,6 +24,7 @@ struct config final {
     auto operator=(Self&& color) noexcept -> Self& = default;
 
     auto load() -> void;
+    auto save() -> void;
 
     theme theme { theme::dark };
     std::unordered_map<std::u8string, std::filesystem::path> paths;
