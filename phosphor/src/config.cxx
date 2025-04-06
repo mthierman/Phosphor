@@ -19,9 +19,12 @@ config::config() {
 
 auto config::load(this Self& self) -> void {
     auto config_file { self.paths.at(u8"config_file") };
-    auto ec { glz::read_file_json(self.settings,
-                                  reinterpret_cast<const char*>(config_file.u8string().data()),
-                                  std::string {}) };
+    std::string buffer;
+    auto ec { glz::read_file_json(
+        self.settings, reinterpret_cast<const char*>(config_file.u8string().data()), buffer) };
+    pane::debug(buffer);
+    pane::debug(self.settings.dark);
+    pane::debug(self.settings.light);
 }
 
 auto config::save(this const Self& self) -> void {

@@ -38,6 +38,7 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
 
         switch (config.theme) {
             case phosphor::theme::dark: {
+                pane::debug(config.settings.dark);
                 desktop_wallpaper->SetWallpaper(0, config.settings.dark.c_str());
             } break;
             case phosphor::theme::light: {
