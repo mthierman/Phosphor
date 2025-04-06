@@ -15,18 +15,14 @@ namespace winrt {
 using namespace winrt::Windows::UI::ViewManagement;
 }; // namespace winrt
 
+auto config { phosphor::config() };
+auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
+                                                                  CLSCTX_ALL) };
+UINT count;
+LPWSTR monitor;
+
 auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
-        // pane::debug(u8"WM_SETTINGCHANGE");
-
-        auto config { phosphor::config() };
-        pane::debug(config.paths.at(u8"config_file").u8string());
-
-        auto desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(CLSID_DesktopWallpaper,
-                                                                          CLSCTX_ALL) };
-        UINT count;
-        LPWSTR monitor;
-
         desktop_wallpaper->GetMonitorDevicePathCount(&count);
         desktop_wallpaper->GetMonitorDevicePathAt(0, &monitor);
 
@@ -57,7 +53,7 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
 
         std::u8string buffer;
         auto json { glz::write_json(config.theme, buffer) };
-        pane::debug(buffer);
+        // pane::debug(buffer);
     }
 
     return DefWindowProcW(hwnd, msg, wparam, lparam);
