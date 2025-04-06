@@ -29,17 +29,17 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
 
         switch (pane::color(winrt::UIColorType::Background).is_dark()) {
             case true: {
-                config.settings.theme = phosphor::theme::dark;
+                config.theme = phosphor::theme::dark;
             } break;
             case false: {
-                config.settings.theme = phosphor::theme::light;
+                config.theme = phosphor::theme::light;
             } break;
         }
 
         auto dark { config.paths.at(u8"wallpapers") / u"dark.png" };
         auto light { config.paths.at(u8"wallpapers") / u"light.png" };
 
-        switch (config.settings.theme) {
+        switch (config.theme) {
             case phosphor::theme::dark: {
                 desktop_wallpaper->SetWallpaper(0, dark.c_str());
             } break;
