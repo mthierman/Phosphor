@@ -17,7 +17,21 @@ config::config() {
     }).value_or(u""));
 }
 
-auto config::load() -> void { }
+auto config::load(this const Self& self) -> void {
+    // pane::filesystem::open_file();
 
-auto config::save() -> void { }
+    // auto config_file { pane::filesystem::open_file(self.paths.at(u8"config_file")) };
+    // if (config_file) {
+    //     auto conf { config_file.value().get() };
+    // }
+
+    phosphor::settings settings;
+    std::string buffer;
+    auto ec { glz::read_file_json(
+        settings,
+        reinterpret_cast<const char*>(self.paths.at(u8"config_file").u8string().data()),
+        std::string {}) };
+}
+
+// auto config::save(this const Self& self) -> void { }
 } // namespace phosphor

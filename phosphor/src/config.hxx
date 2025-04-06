@@ -12,6 +12,10 @@ enum struct theme { light = 0, dark };
 //     static constexpr auto value = enumerate(light, dark);
 // };
 
+struct settings final {
+    phosphor::theme theme { phosphor::theme::dark };
+};
+
 struct config final {
     using Self = config;
 
@@ -23,10 +27,10 @@ struct config final {
     config(Self&& color) noexcept = default;
     auto operator=(Self&& color) noexcept -> Self& = default;
 
-    auto load() -> void;
-    auto save() -> void;
+    auto load(this const Self& self) -> void;
+    // auto save(this const Self& self) -> void;
 
-    theme theme { theme::dark };
     std::unordered_map<std::u8string, std::filesystem::path> paths;
+    phosphor::settings settings;
 };
 } // namespace phosphor
