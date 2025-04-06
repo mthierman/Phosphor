@@ -27,7 +27,7 @@ struct config final {
     config(Self&& color) noexcept = default;
     auto operator=(Self&& color) noexcept -> Self& = default;
 
-    auto load(this const Self& self) -> void;
+    auto load(this Self& self) -> void;
     auto save(this const Self& self) -> void;
 
     std::unordered_map<std::u8string, std::filesystem::path> paths;
