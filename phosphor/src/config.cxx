@@ -18,12 +18,13 @@ config::config() {
 }
 
 auto config::load(this Self& self) -> void {
-    phosphor::settings settings;
+    // phosphor::settings settings;
     auto config_file { self.paths.at(u8"config_file") };
-    auto ec { glz::read_file_json(
-        settings, reinterpret_cast<const char*>(config_file.u8string().data()), std::string {}) };
+    auto ec { glz::read_file_json(self.settings,
+                                  reinterpret_cast<const char*>(config_file.u8string().data()),
+                                  std::string {}) };
 
-    self.settings = settings;
+    // self.settings = settings;
 }
 
 auto config::save(this const Self& self) -> void {
