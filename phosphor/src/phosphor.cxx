@@ -119,7 +119,7 @@ auto wWinMain(HINSTANCE /* hinstance */,
               int /* ncmdshow */) -> int {
     auto co_init { pane::co_init::apartment_threaded() };
 
-    config::load();
+    config.load();
 
     make_window();
 
