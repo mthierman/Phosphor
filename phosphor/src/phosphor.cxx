@@ -36,17 +36,16 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
             } break;
         }
 
-        auto dark { config.paths.at(u8"wallpapers") / u"dark.png" };
-        auto light { config.paths.at(u8"wallpapers") / u"light.png" };
-
         switch (config.theme) {
             case phosphor::theme::dark: {
-                desktop_wallpaper->SetWallpaper(0, dark.c_str());
+                desktop_wallpaper->SetWallpaper(0, config.settings.dark.c_str());
             } break;
             case phosphor::theme::light: {
-                desktop_wallpaper->SetWallpaper(0, light.c_str());
+                desktop_wallpaper->SetWallpaper(0, config.settings.light.c_str());
             } break;
         }
+
+        config.save();
     }
 
     return DefWindowProcW(hwnd, msg, wparam, lparam);
