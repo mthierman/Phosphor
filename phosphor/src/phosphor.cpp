@@ -14,7 +14,7 @@ app::app() {
         if (msg == WM_SETTINGCHANGE) {
             this->config.load();
 
-            if (this->system_dark_mode()) {
+            if (pane::color(winrt::UIColorType::Background).is_dark()) {
                 this->theme = phosphor::theme::dark;
                 desktop_wallpaper->SetWallpaper(0, config.settings.dark.c_str());
             } else {
@@ -31,8 +31,4 @@ app::app() {
 
     window = std::make_unique<pane::window>(std::move(wndproc));
 };
-
-auto app::system_dark_mode() -> bool {
-    return pane::color(winrt::UIColorType::Background).is_dark();
-}
 } // namespace phosphor
