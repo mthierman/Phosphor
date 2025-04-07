@@ -120,21 +120,5 @@ auto wWinMain(HINSTANCE /* hinstance */,
 
     make_window();
 
-    MSG msg {};
-    int r {};
-
-    while ((r = GetMessageW(&msg, nullptr, 0, 0)) != 0) {
-        if (r == -1) {
-            return EXIT_FAILURE;
-        }
-
-        else {
-            TranslateMessage(&msg);
-            DispatchMessageW(&msg);
-        }
-    }
-
-    // config.save();
-
-    return static_cast<int>(msg.wParam);
+    return pane::system::message_loop();
 }
