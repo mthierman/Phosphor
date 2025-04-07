@@ -14,27 +14,22 @@ auto phosphor::app() -> int {
 
     auto window { pane::window(
         std::move([&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
-        return self.window_procedure(hwnd, msg, wparam, lparam);
+        if (msg == WM_SETTINGCHANGE) {
+            self.config.load();
+
+            if (pane::color(winrt::UIColorType::Background).is_dark()) {
+                pane::debug(self.config.settings.dark);
+                self.theme = theme::dark;
+                self.desktop_wallpaper->SetWallpaper(0, self.config.settings.dark.c_str());
+            } else {
+                pane::debug(self.config.settings.light);
+                self.theme = theme::light;
+                self.desktop_wallpaper->SetWallpaper(0, self.config.settings.light.c_str());
+            }
+        }
+
+        return DefWindowProcW(hwnd, msg, wparam, lparam);
     })) };
 
     return pane::system::message_loop();
 };
-
-auto phosphor::window_procedure(this Self& self, HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
-    -> LRESULT {
-    if (msg == WM_SETTINGCHANGE) {
-        self.config.load();
-
-        if (pane::color(winrt::UIColorType::Background).is_dark()) {
-            pane::debug(self.config.settings.dark);
-            self.theme = theme::dark;
-            self.desktop_wallpaper->SetWallpaper(0, self.config.settings.dark.c_str());
-        } else {
-            pane::debug(self.config.settings.light);
-            self.theme = theme::light;
-            self.desktop_wallpaper->SetWallpaper(0, self.config.settings.light.c_str());
-        }
-    }
-
-    return DefWindowProcW(hwnd, msg, wparam, lparam);
-}

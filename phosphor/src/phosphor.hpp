@@ -34,8 +34,6 @@ struct phosphor final {
     auto operator=(Self&& self) noexcept -> Self& = delete;
 
     static auto app() -> int;
-    auto window_procedure(this Self& self, HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
-        -> LRESULT;
 
     pane::co_init co_init { pane::co_init::apartment_threaded() };
     pane::config<phosphor::settings> config { pane::config<phosphor::settings>() };
