@@ -3,7 +3,9 @@
 #include <glaze/glaze.hpp>
 #include <pane/pane.hxx>
 
-auto phosphor::run(this Self& self) -> int {
+auto phosphor::run() -> int {
+    auto self { Self() };
+
     self.config.load();
     self.desktop_wallpaper->GetMonitorDevicePathCount(&self.count);
     self.desktop_wallpaper->GetMonitorDevicePathAt(0, &self.monitor);
@@ -14,10 +16,10 @@ auto phosphor::run(this Self& self) -> int {
             self.config.load();
 
             if (pane::color(winrt::UIColorType::Background).is_dark()) {
-                self.theme = phosphor::theme::dark;
+                self.theme = theme::dark;
                 self.desktop_wallpaper->SetWallpaper(0, self.config.settings.dark.c_str());
             } else {
-                self.theme = phosphor::theme::light;
+                self.theme = theme::light;
                 self.desktop_wallpaper->SetWallpaper(0, self.config.settings.light.c_str());
             }
 

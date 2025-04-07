@@ -26,7 +26,6 @@ struct phosphor final {
         std::filesystem::path light;
     };
 
-    phosphor() = default;
     ~phosphor() = default;
 
     phosphor(const Self& self) = delete;
@@ -34,7 +33,7 @@ struct phosphor final {
     phosphor(Self&& self) noexcept = delete;
     auto operator=(Self&& self) noexcept -> Self& = delete;
 
-    auto run(this Self& self) -> int;
+    static auto run() -> int;
 
     pane::co_init co_init { pane::co_init::apartment_threaded() };
     pane::config<phosphor::settings> config { pane::config<phosphor::settings>() };
@@ -50,6 +49,9 @@ struct phosphor final {
     }).value_or(u"")
     };
     pane::window window;
+
+private:
+    phosphor() = default;
 };
 
 template <> struct glz::meta<theme> {
