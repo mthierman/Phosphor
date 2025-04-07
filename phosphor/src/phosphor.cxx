@@ -11,11 +11,11 @@
 #include <glaze/glaze.hpp>
 #include "config.hxx"
 
-auto system_dark_mode() -> bool { return pane::color(winrt::UIColorType::Background).is_dark(); }
-
 namespace winrt {
 using namespace winrt::Windows::UI::ViewManagement;
 }; // namespace winrt
+
+auto system_dark_mode() -> bool { return pane::color(winrt::UIColorType::Background).is_dark(); }
 
 auto config { phosphor::config() };
 
