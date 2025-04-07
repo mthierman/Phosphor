@@ -11,8 +11,6 @@ auto app::run(this Self& self) -> int {
     self.desktop_wallpaper->GetMonitorDevicePathCount(&self.count);
     self.desktop_wallpaper->GetMonitorDevicePathAt(0, &self.monitor);
 
-    // self.window = std::make_unique<pane::window>();
-
     auto wndproc = [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
         if (msg == WM_SETTINGCHANGE) {
             self.config.load();
@@ -33,6 +31,8 @@ auto app::run(this Self& self) -> int {
     };
 
     self.window = std::make_unique<pane::window>(std::move(wndproc));
+
+    self.window->activate();
 
     return pane::system::message_loop();
 };
