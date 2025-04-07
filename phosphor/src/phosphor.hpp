@@ -46,7 +46,7 @@ struct phosphor final {
     };
 
 private:
-    phosphor();
+    phosphor() = default;
 };
 
 template <> struct glz::meta<theme> {
