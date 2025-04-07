@@ -12,8 +12,10 @@ phosphor::phosphor() {
 auto phosphor::app() -> int {
     auto self { Self() };
 
-    pane::window({ .title { u8"title" }, .visible { false }, .webview { true } },
-                 [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
+    pane::window(
+        pane::window::config {
+            .title { u8"title" }, .visible { false }, .webview { true }, .home_page { u8"" } },
+        [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
         if (msg == WM_SETTINGCHANGE) {
             self.config.load();
 
