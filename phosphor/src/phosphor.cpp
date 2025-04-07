@@ -9,18 +9,18 @@ phosphor::phosphor() {
     this->desktop_wallpaper->GetMonitorDevicePathAt(0, &this->monitor);
 }
 
-auto phosphor::run() -> int {
+auto phosphor::app() -> int {
     auto self { Self() };
 
     auto window { pane::window(
         std::move([&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
-        return self.message_handler(hwnd, msg, wparam, lparam);
+        return self.window_procedure(hwnd, msg, wparam, lparam);
     })) };
 
     return pane::system::message_loop();
 };
 
-auto phosphor::message_handler(this Self& self, HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
+auto phosphor::window_procedure(this Self& self, HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
     -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
         self.config.load();
