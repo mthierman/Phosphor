@@ -13,6 +13,7 @@ auto phosphor::app() -> int {
     auto self { Self() };
 
     auto window { pane::window(
+        { .title { u8"title" }, .visible { false } },
         [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
         if (msg == WM_SETTINGCHANGE) {
             self.config.load();
@@ -29,7 +30,7 @@ auto phosphor::app() -> int {
         }
 
         return DefWindowProcW(hwnd, msg, wparam, lparam);
-    }, pane::window::config { .title { u8"title" }, .visible { false } }) };
+    }) };
 
     return pane::system::message_loop();
 };
