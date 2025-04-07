@@ -115,9 +115,7 @@ auto wWinMain(HINSTANCE /* hinstance */,
               PWSTR /* pcmdline */,
               int /* ncmdshow */) -> int {
     auto co_init { pane::co_init::apartment_threaded() };
-
     config.load();
-
     make_window();
 
     return pane::system::message_loop();
