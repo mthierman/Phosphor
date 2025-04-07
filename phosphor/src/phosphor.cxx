@@ -6,7 +6,7 @@ auto phosphor::system_dark_mode() -> bool {
 }
 
 auto phosphor::make_window(WNDPROC window_procedure) -> void {
-    auto instance = [window_procedure]() -> HMODULE {
+    auto instance = []() -> HMODULE {
         HMODULE hmodule;
 
         if (GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT
