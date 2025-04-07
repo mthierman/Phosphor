@@ -41,8 +41,8 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
     return DefWindowProcW(hwnd, msg, wparam, lparam);
 }
 
-auto phosphor::make_window() -> void {
-    auto instance = []() -> HMODULE {
+auto phosphor::make_window(WNDPROC window_procedure) -> void {
+    auto instance = [window_procedure]() -> HMODULE {
         HMODULE hmodule;
 
         if (GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT
@@ -105,7 +105,7 @@ auto wWinMain(HINSTANCE /* hinstance */,
               int /* ncmdshow */) -> int {
     auto co_init { pane::co_init::apartment_threaded() };
     config.load();
-    phosphor::make_window();
+    phosphor::make_window(window_procedure);
 
     return pane::system::message_loop();
 }
