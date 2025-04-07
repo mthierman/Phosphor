@@ -48,7 +48,6 @@ struct phosphor final {
         return path / u"Phosphor" / u"config.json";
     }).value_or(u"")
     };
-    pane::window window;
 
 private:
     phosphor() = default;
