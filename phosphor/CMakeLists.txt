@@ -11,7 +11,8 @@ add_executable(
     )
 target_sources(
     phosphor
-    PRIVATE "src/phosphor.cxx"
+    PRIVATE "src/main.cpp"
+            "src/phosphor.cpp"
             "data/phosphor.rc"
     )
 target_link_libraries(
