@@ -18,10 +18,10 @@ struct config final {
     config() = default;
     ~config() = default;
 
-    config(const Self& color) = default;
-    auto operator=(const Self& color) -> Self& = default;
-    config(Self&& color) noexcept = default;
-    auto operator=(Self&& color) noexcept -> Self& = default;
+    config(const Self& color) = delete;
+    auto operator=(const Self& color) -> Self& = delete;
+    config(Self&& color) noexcept = delete;
+    auto operator=(Self&& color) noexcept -> Self& = delete;
 
     auto load(this Self& self) -> void;
     auto save(this const Self& self) -> void;
