@@ -31,7 +31,6 @@ auto app::run(this Self& self) -> int {
     };
 
     self.window = std::make_unique<pane::window>(std::move(wndproc));
-
     self.window->activate();
 
     return pane::system::message_loop();
