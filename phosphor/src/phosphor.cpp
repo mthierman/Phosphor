@@ -11,10 +11,10 @@ auto phosphor::app() -> int {
     self.desktop_wallpaper->GetMonitorDevicePathAt(0, &self.monitor);
 
     auto window { pane::window(
-        pane::window::config { .title { u8"title" },
-                               .visible { true },
-                               .webview { true },
-                               .home_page { u8"about:blank" } },
+        { .title { u8"title" },
+          .visible { true },
+          .webview { true },
+          .home_page { u8"about:blank" } },
         [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
         if (msg == WM_SETTINGCHANGE) {
             self.config.load();
