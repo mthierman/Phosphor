@@ -6,7 +6,7 @@ auto wWinMain(HINSTANCE /* hinstance */,
               HINSTANCE /* hprevinstance */,
               PWSTR /* pcmdline */,
               int /* ncmdshow */) -> int {
-    phosphor::app();
+    auto app { phosphor::app() };
 
-    return pane::system::message_loop();
+    return app.run();
 }

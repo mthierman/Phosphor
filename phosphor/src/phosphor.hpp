@@ -28,6 +28,8 @@ struct app final {
     app();
     ~app() = default;
 
+    auto run(this Self& self) -> int;
+
     pane::co_init co_init { pane::co_init::apartment_threaded() };
     pane::config<phosphor::settings> config { pane::config<phosphor::settings>() };
     phosphor::theme theme { phosphor::theme::light };
