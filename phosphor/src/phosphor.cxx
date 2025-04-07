@@ -18,6 +18,7 @@ using namespace winrt::Windows::UI::ViewManagement;
 auto system_dark_mode() -> bool { return pane::color(winrt::UIColorType::Background).is_dark(); }
 
 auto config { phosphor::config() };
+auto theme { phosphor::theme::light };
 
 auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
     if (msg == WM_SETTINGCHANGE) {
@@ -32,12 +33,12 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
         desktop_wallpaper->GetMonitorDevicePathAt(0, &monitor);
 
         if (system_dark_mode()) {
-            config.theme = phosphor::theme::dark;
+            theme = phosphor::theme::dark;
         } else {
-            config.theme = phosphor::theme::light;
+            theme = phosphor::theme::light;
         }
 
-        switch (config.theme) {
+        switch (theme) {
             case phosphor::theme::dark: {
                 pane::debug(config.settings.dark);
                 desktop_wallpaper->SetWallpaper(0, config.settings.dark.c_str());

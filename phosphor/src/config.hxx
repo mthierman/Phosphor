@@ -41,6 +41,5 @@ struct config final {
     };
 
     phosphor::settings settings;
-    phosphor::theme theme { phosphor::theme::light };
 };
 } // namespace phosphor
