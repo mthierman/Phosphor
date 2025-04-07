@@ -12,7 +12,7 @@ auto phosphor::app() -> int {
 
     pane::window(pane::window::config { .title { u8"title" },
                                         .visible { true },
-                                        .webview { true },
+                                        .webview { false },
                                         .home_page { u8"about:blank" } },
                  [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
         if (msg == WM_SETTINGCHANGE) {
