@@ -15,7 +15,7 @@ struct settings final {
 struct config final {
     using Self = config;
 
-    config();
+    config() = default;
     ~config() = default;
 
     config(const Self& color) = default;
@@ -26,7 +26,20 @@ struct config final {
     auto load(this Self& self) -> void;
     auto save(this const Self& self) -> void;
 
-    std::unordered_map<std::u8string, std::filesystem::path> paths;
+    std::filesystem::path config_file {
+        pane::filesystem::known_folder()
+            .transform([](const std::filesystem::path& path) -> std::filesystem::path {
+        return path / u"Phosphor" / u"config.json";
+    }).value_or(u"")
+    };
+
+    std::filesystem::path wallpapers_dir {
+        pane::filesystem::known_folder(FOLDERID_Pictures)
+            .transform([](const std::filesystem::path& path) -> std::filesystem::path {
+        return path / u"Wallpapers";
+    }).value_or(u"")
+    };
+
     phosphor::settings settings;
     phosphor::theme theme { phosphor::theme::dark };
 };
