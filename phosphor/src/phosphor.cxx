@@ -11,7 +11,7 @@ auto phosphor::make_window(WNDPROC window_procedure) -> void {
 
         if (GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT
                                    | GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS,
-                               reinterpret_cast<LPCWSTR>(&window_procedure),
+                               reinterpret_cast<LPCWSTR>(&phosphor::make_window),
                                &hmodule)
             == 0) {
             return nullptr;
