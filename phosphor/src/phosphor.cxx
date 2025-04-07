@@ -1,21 +1,5 @@
-#include <Windows.h>
-#include <ShObjIdl.h>
-#include <filesystem>
-#include <cstdlib>
-#include <utility>
-#include <print>
-#include <wil/com.h>
-#include <winrt/Windows.Foundation.h>
-#include <winrt/Windows.UI.ViewManagement.h>
-#include <pane/pane.hxx>
-#include <glaze/glaze.hpp>
+#include "phosphor.hxx"
 #include "config.hxx"
-
-namespace winrt {
-using namespace winrt::Windows::UI::ViewManagement;
-}; // namespace winrt
-
-auto system_dark_mode() -> bool { return pane::color(winrt::UIColorType::Background).is_dark(); }
 
 auto config { phosphor::config() };
 auto theme { phosphor::theme::light };
@@ -32,7 +16,7 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
         desktop_wallpaper->GetMonitorDevicePathCount(&count);
         desktop_wallpaper->GetMonitorDevicePathAt(0, &monitor);
 
-        if (system_dark_mode()) {
+        if (phosphor::system_dark_mode()) {
             theme = phosphor::theme::dark;
         } else {
             theme = phosphor::theme::light;
