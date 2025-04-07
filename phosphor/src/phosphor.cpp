@@ -11,28 +11,28 @@ auto app::run(this Self& self) -> int {
     self.desktop_wallpaper->GetMonitorDevicePathCount(&self.count);
     self.desktop_wallpaper->GetMonitorDevicePathAt(0, &self.monitor);
 
-    // auto wndproc = [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
-    //     if (msg == WM_SETTINGCHANGE) {
-    //         self.config.load();
+    // self.window = std::make_unique<pane::window>();
 
-    //         if (pane::color(winrt::UIColorType::Background).is_dark()) {
-    //             self.theme = phosphor::theme::dark;
-    //             self.desktop_wallpaper->SetWallpaper(0, self.config.settings.dark.c_str());
-    //         } else {
-    //             self.theme = phosphor::theme::light;
-    //             self.desktop_wallpaper->SetWallpaper(0, self.config.settings.light.c_str());
-    //         }
+    auto wndproc = [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
+        if (msg == WM_SETTINGCHANGE) {
+            self.config.load();
 
-    //         pane::debug(self.config.settings.dark);
-    //         pane::debug(self.config.settings.light);
-    //     }
+            if (pane::color(winrt::UIColorType::Background).is_dark()) {
+                self.theme = phosphor::theme::dark;
+                self.desktop_wallpaper->SetWallpaper(0, self.config.settings.dark.c_str());
+            } else {
+                self.theme = phosphor::theme::light;
+                self.desktop_wallpaper->SetWallpaper(0, self.config.settings.light.c_str());
+            }
 
-    //     return DefWindowProcW(hwnd, msg, wparam, lparam);
-    // };
+            pane::debug(self.config.settings.dark);
+            pane::debug(self.config.settings.light);
+        }
 
-    // self.window = std::make_unique<pane::window>(std::move(wndproc));
+        return DefWindowProcW(hwnd, msg, wparam, lparam);
+    };
 
-    self.window = std::make_unique<pane::window>();
+    self.window = std::make_unique<pane::window>(std::move(wndproc));
 
     return pane::system::message_loop();
 };
