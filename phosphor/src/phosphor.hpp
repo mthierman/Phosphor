@@ -28,8 +28,15 @@ struct app final {
     app();
     ~app() = default;
 
+    auto system_dark_mode() -> bool;
+
+    pane::co_init co_init { pane::co_init::apartment_threaded() };
     pane::config<phosphor::settings> config { pane::config<phosphor::settings>() };
     phosphor::theme theme { phosphor::theme::light };
+    wil::com_ptr<IDesktopWallpaper> desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(
+        CLSID_DesktopWallpaper, CLSCTX_ALL) };
+    UINT count;
+    LPWSTR monitor;
     std::filesystem::path config_file {
         pane::filesystem::known_folder()
             .transform([](const std::filesystem::path& path) -> std::filesystem::path {
@@ -38,8 +45,6 @@ struct app final {
     };
     std::unique_ptr<pane::window> window;
 };
-
-auto system_dark_mode() -> bool;
 } // namespace phosphor
 
 template <> struct glz::meta<phosphor::theme> {
