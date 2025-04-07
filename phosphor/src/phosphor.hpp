@@ -25,9 +25,6 @@ struct settings final {
 struct app final {
     using Self = app;
 
-    app();
-    ~app() = default;
-
     auto run(this Self& self) -> int;
 
     pane::co_init co_init { pane::co_init::apartment_threaded() };

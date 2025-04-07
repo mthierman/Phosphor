@@ -4,8 +4,6 @@
 #include <pane/pane.hxx>
 
 namespace phosphor {
-app::app() { };
-
 auto app::run(this Self& self) -> int {
     self.config.load();
     self.desktop_wallpaper->GetMonitorDevicePathCount(&self.count);
