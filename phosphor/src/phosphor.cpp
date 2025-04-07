@@ -11,7 +11,7 @@ auto phosphor::app() -> int {
     self.desktop_wallpaper->GetMonitorDevicePathAt(0, &self.monitor);
 
     pane::window(pane::window::config { .title { u8"title" },
-                                        .visible { false },
+                                        .visible { true },
                                         .webview { true },
                                         .home_page { u8"about:blank" } },
                  [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
