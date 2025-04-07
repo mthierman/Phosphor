@@ -35,7 +35,7 @@ app::app() {
         return DefWindowProcW(hwnd, msg, wparam, lparam);
     };
 
-    window = std::make_unique<pane::window>(wndproc);
+    window = std::make_unique<pane::window>(std::move(wndproc));
 };
 
 auto app::system_dark_mode() -> bool {
