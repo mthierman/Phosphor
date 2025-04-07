@@ -11,6 +11,8 @@
 #include <glaze/glaze.hpp>
 #include "config.hxx"
 
+auto is_dark_mode() -> bool { return pane::color(winrt::UIColorType::Background).is_dark(); }
+
 namespace winrt {
 using namespace winrt::Windows::UI::ViewManagement;
 }; // namespace winrt
@@ -29,13 +31,10 @@ auto window_procedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRES
         desktop_wallpaper->GetMonitorDevicePathCount(&count);
         desktop_wallpaper->GetMonitorDevicePathAt(0, &monitor);
 
-        switch (pane::color(winrt::UIColorType::Background).is_dark()) {
-            case true: {
-                config.theme = phosphor::theme::dark;
-            } break;
-            case false: {
-                config.theme = phosphor::theme::light;
-            } break;
+        if (is_dark_mode()) {
+            config.theme = phosphor::theme::dark;
+        } else {
+            config.theme = phosphor::theme::light;
         }
 
         switch (config.theme) {
