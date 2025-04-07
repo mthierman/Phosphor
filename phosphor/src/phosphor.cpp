@@ -10,11 +10,12 @@ auto phosphor::app() -> int {
     self.desktop_wallpaper->GetMonitorDevicePathCount(&self.count);
     self.desktop_wallpaper->GetMonitorDevicePathAt(0, &self.monitor);
 
-    pane::window(pane::window::config { .title { u8"title" },
-                                        .visible { true },
-                                        .webview { false },
-                                        .home_page { u8"about:blank" } },
-                 [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
+    auto window { pane::window(
+        pane::window::config { .title { u8"title" },
+                               .visible { true },
+                               .webview { false },
+                               .home_page { u8"about:blank" } },
+        [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
         if (msg == WM_SETTINGCHANGE) {
             self.config.load();
 
@@ -31,7 +32,9 @@ auto phosphor::app() -> int {
         }
 
         return DefWindowProcW(hwnd, msg, wparam, lparam);
-    });
+    }) };
+
+    window.activate();
 
     return pane::system::message_loop();
 };
