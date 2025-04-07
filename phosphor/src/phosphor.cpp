@@ -26,15 +26,14 @@ auto phosphor::message_handler(this Self& self, HWND hwnd, UINT msg, WPARAM wpar
         self.config.load();
 
         if (pane::color(winrt::UIColorType::Background).is_dark()) {
+            pane::debug(self.config.settings.dark);
             self.theme = theme::dark;
             self.desktop_wallpaper->SetWallpaper(0, self.config.settings.dark.c_str());
         } else {
+            pane::debug(self.config.settings.light);
             self.theme = theme::light;
             self.desktop_wallpaper->SetWallpaper(0, self.config.settings.light.c_str());
         }
-
-        pane::debug(self.config.settings.dark);
-        pane::debug(self.config.settings.light);
     }
 
     return DefWindowProcW(hwnd, msg, wparam, lparam);
