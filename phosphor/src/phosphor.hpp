@@ -12,10 +12,6 @@
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.UI.ViewManagement.h>
 
-namespace winrt {
-using namespace winrt::Windows::UI::ViewManagement;
-}; // namespace winrt
-
 enum struct theme { light = 0, dark };
 
 struct phosphor final {

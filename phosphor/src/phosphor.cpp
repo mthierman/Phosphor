@@ -17,7 +17,8 @@ auto phosphor::app() -> int {
         if (msg == WM_SETTINGCHANGE) {
             self.config.load();
 
-            if (pane::color(winrt::UIColorType::Background).is_dark()) {
+            if (pane::color(winrt::Windows::UI::ViewManagement::UIColorType::Background)
+                    .is_dark()) {
                 pane::debug(self.config.settings.dark);
                 self.theme = theme::dark;
                 self.desktop_wallpaper->SetWallpaper(0, self.config.settings.dark.c_str());
