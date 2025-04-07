@@ -6,7 +6,14 @@
 
 namespace phosphor {
 enum struct theme { light = 0, dark };
+}
 
+template <> struct glz::meta<phosphor::theme> {
+    using enum phosphor::theme;
+    static constexpr auto value = glz::enumerate(light, dark);
+};
+
+namespace phosphor {
 struct settings final {
     std::filesystem::path dark;
     std::filesystem::path light;
@@ -37,8 +44,3 @@ struct config final {
     phosphor::theme theme { phosphor::theme::light };
 };
 } // namespace phosphor
-
-template <> struct glz::meta<phosphor::theme> {
-    using enum phosphor::theme;
-    static constexpr auto value = glz::enumerate(light, dark);
-};
