@@ -34,7 +34,5 @@ auto phosphor::app() -> int {
         return DefWindowProcW(hwnd, msg, wparam, lparam);
     }) };
 
-    window.activate();
-
     return pane::system::message_loop();
 };
