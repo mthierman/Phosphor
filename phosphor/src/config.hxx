@@ -47,5 +47,5 @@ struct config final {
 
 template <> struct glz::meta<phosphor::theme> {
     using enum phosphor::theme;
-    static constexpr auto value = enumerate(light, dark);
+    static constexpr auto value = glz::enumerate(light, dark);
 };
