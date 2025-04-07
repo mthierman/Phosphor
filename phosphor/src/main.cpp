@@ -44,7 +44,8 @@ auto wWinMain(HINSTANCE /* hinstance */,
         return DefWindowProcW(hwnd, msg, wparam, lparam);
     };
 
-    phosphor::make_window(wndproc);
+    // phosphor::make_window(wndproc);
+    pane::window();
 
     return pane::system::message_loop();
 }

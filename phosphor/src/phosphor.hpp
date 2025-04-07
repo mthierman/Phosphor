@@ -31,7 +31,6 @@ struct app final {
 };
 
 auto system_dark_mode() -> bool;
-auto make_window(WNDPROC window_procedure) -> void;
 } // namespace phosphor
 
 template <> struct glz::meta<phosphor::theme> {
