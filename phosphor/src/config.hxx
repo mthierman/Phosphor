@@ -33,13 +33,6 @@ struct config final {
     }).value_or(u"")
     };
 
-    std::filesystem::path wallpapers_dir {
-        pane::filesystem::known_folder(FOLDERID_Pictures)
-            .transform([](const std::filesystem::path& path) -> std::filesystem::path {
-        return path / u"Wallpapers";
-    }).value_or(u"")
-    };
-
     phosphor::settings settings;
     phosphor::theme theme { phosphor::theme::light };
 };
