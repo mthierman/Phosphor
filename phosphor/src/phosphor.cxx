@@ -1,5 +1,7 @@
 #include "phosphor.hxx"
-#include "config.hxx"
+#include <filesystem>
+#include <glaze/glaze.hpp>
+#include <pane/pane.hxx>
 
 auto phosphor::system_dark_mode() -> bool {
     return pane::color(winrt::UIColorType::Background).is_dark();
@@ -63,7 +65,8 @@ auto phosphor::make_window(WNDPROC window_procedure) -> void {
     // ShowWindow(window, SW_SHOWNORMAL);
 }
 
-auto config { phosphor::config() };
+// auto config { phosphor::config() };
+auto config { pane::config<phosphor::settings>() };
 auto theme { phosphor::theme::light };
 
 auto wWinMain(HINSTANCE /* hinstance */,
