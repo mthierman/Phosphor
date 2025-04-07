@@ -3,13 +3,13 @@
 #include <glaze/glaze.hpp>
 #include <pane/pane.hxx>
 
-namespace phosphor {
-auto app::run(this Self& self) -> int {
+auto phosphor::run(this Self& self) -> int {
     self.config.load();
     self.desktop_wallpaper->GetMonitorDevicePathCount(&self.count);
     self.desktop_wallpaper->GetMonitorDevicePathAt(0, &self.monitor);
 
-    auto wndproc = [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
+    self.window = pane::window(
+        std::move([&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
         if (msg == WM_SETTINGCHANGE) {
             self.config.load();
 
@@ -26,11 +26,9 @@ auto app::run(this Self& self) -> int {
         }
 
         return DefWindowProcW(hwnd, msg, wparam, lparam);
-    };
+    }));
 
-    self.window = std::make_unique<pane::window>(std::move(wndproc));
-    self.window->activate();
+    self.window.activate();
 
     return pane::system::message_loop();
 };
-} // namespace phosphor
