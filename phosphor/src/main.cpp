@@ -1,6 +1,5 @@
 #include "phosphor.hpp"
 
-// auto config { phosphor::config() };
 auto config { pane::config<phosphor::settings>() };
 auto theme { phosphor::theme::light };
 
