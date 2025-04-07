@@ -34,6 +34,8 @@ struct phosphor final {
     auto operator=(Self&& self) noexcept -> Self& = delete;
 
     static auto run() -> int;
+    auto message_handler(this Self& self, HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
+        -> LRESULT;
 
     pane::co_init co_init { pane::co_init::apartment_threaded() };
     pane::config<phosphor::settings> config { pane::config<phosphor::settings>() };
@@ -50,7 +52,7 @@ struct phosphor final {
     };
 
 private:
-    phosphor() = default;
+    phosphor();
 };
 
 template <> struct glz::meta<theme> {
