@@ -3,14 +3,12 @@
 #include <glaze/glaze.hpp>
 #include <pane/pane.hxx>
 
-phosphor::phosphor() {
-    this->config.load();
-    this->desktop_wallpaper->GetMonitorDevicePathCount(&this->count);
-    this->desktop_wallpaper->GetMonitorDevicePathAt(0, &this->monitor);
-}
-
 auto phosphor::app() -> int {
     auto self { Self() };
+
+    self.config.load();
+    self.desktop_wallpaper->GetMonitorDevicePathCount(&self.count);
+    self.desktop_wallpaper->GetMonitorDevicePathAt(0, &self.monitor);
 
     pane::window(
         pane::window::config {
