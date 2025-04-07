@@ -25,6 +25,14 @@ struct settings final {
 struct app final {
     using Self = app;
 
+    app() = default;
+    ~app() = default;
+
+    app(const Self& self) = delete;
+    auto operator=(const Self& self) -> Self& = delete;
+    app(Self&& self) noexcept = delete;
+    auto operator=(Self&& self) noexcept -> Self& = delete;
+
     auto run(this Self& self) -> int;
 
     pane::co_init co_init { pane::co_init::apartment_threaded() };
