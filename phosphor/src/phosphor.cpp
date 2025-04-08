@@ -10,10 +10,25 @@ auto phosphor::app() -> int {
     self.desktop_wallpaper->GetMonitorDevicePathCount(&self.count);
     self.desktop_wallpaper->GetMonitorDevicePathAt(0, &self.monitor);
 
-    auto settings_window { pane::window({ .title { u8"settings" },
-                                          .background_color { pane::color { 255, 255, 0, 255 } },
-                                          .visible { true },
-                                          .webview { false } }) };
+    auto settings_window { pane::window(
+        { .title { u8"settings" },
+          .background_color { pane::color { 255, 255, 255, 255 } },
+          .visible { true },
+          .webview { false } },
+        [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
+        if (auto window { pane::window::get_instance(hwnd) }) {
+            if (msg == WM_ERASEBKGND) {
+                auto rect { window->client_rect() };
+                FillRect(reinterpret_cast<HDC>(wparam),
+                         &rect,
+                         pane::color(255, 0, 255, 255).to_hbrush());
+
+                return 1;
+            }
+        }
+
+        return DefWindowProcW(hwnd, msg, wparam, lparam);
+    }) };
 
     auto main_window { pane::window(
         {
