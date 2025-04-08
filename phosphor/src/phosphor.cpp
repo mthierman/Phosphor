@@ -11,9 +11,9 @@ auto phosphor::app() -> int {
     self.desktop_wallpaper->GetMonitorDevicePathAt(0, &self.monitor);
 
     auto settings_window { pane::window({ .title { u8"settings" },
-                                          .background_color { pane::color {} },
+                                          .background_color { pane::color { 255, 0, 255, 255 } },
                                           .visible { true },
-                                          .webview { true } }) };
+                                          .webview { false } }) };
 
     auto main_window { pane::window(
         {
