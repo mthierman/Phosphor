@@ -10,11 +10,20 @@ auto phosphor::app() -> int {
     self.desktop_wallpaper->GetMonitorDevicePathCount(&self.count);
     self.desktop_wallpaper->GetMonitorDevicePathAt(0, &self.monitor);
 
-    auto settings_window { pane::window(
-        { .title { u8"settings" }, .visible { true }, .webview { false } }) };
+    auto settings_window { pane::window({ .title { u8"settings" },
+                                          .background_color { pane::color {} },
+                                          .visible { true },
+                                          .shutdown { false },
+                                          .webview { true } }) };
 
     auto main_window { pane::window(
-        { .title { u8"title" }, .visible { true }, .webview { true } },
+        {
+            .title { u8"phosphor" },
+            .background_color { pane::color {} },
+            .visible { false },
+            .shutdown { false },
+            .webview { false },
+        },
         [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
         if (msg == WM_SETTINGCHANGE) {
             self.config.load();
