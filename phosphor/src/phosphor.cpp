@@ -34,7 +34,7 @@ auto phosphor::app() -> int {
     //     return DefWindowProcW(hwnd, msg, wparam, lparam);
     // }) };
 
-    auto window { pane::window({ .title { u8"title" },
+    auto window { pane::window({ .title { u8"about:blank" },
                                  .visible { true },
                                  .webview { true },
                                  .home_page { u8"about:blank" } }) };
