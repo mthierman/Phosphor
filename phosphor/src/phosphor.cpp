@@ -37,7 +37,7 @@ auto phosphor::app() -> int {
     auto window { pane::window({ .title { u8"about:blank" },
                                  .visible { true },
                                  .webview { true },
-                                 .home_page { u8"about:blank" } }) };
+                                 .home_page { u8"https://www.google.com/" } }) };
 
     return pane::system::message_loop();
 };
