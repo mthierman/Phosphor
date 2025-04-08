@@ -13,7 +13,6 @@ auto phosphor::app() -> int {
     auto settings_window { pane::window({ .title { u8"settings" },
                                           .background_color { pane::color {} },
                                           .visible { true },
-                                          .shutdown { true },
                                           .webview { true } }) };
 
     auto main_window { pane::window(
@@ -21,7 +20,6 @@ auto phosphor::app() -> int {
             .title { u8"phosphor" },
             .background_color { pane::color {} },
             .visible { false },
-            .shutdown { false },
             .webview { false },
         },
         [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
