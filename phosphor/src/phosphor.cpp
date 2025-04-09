@@ -30,6 +30,11 @@ auto app::run() -> int {
             auto json { self.config.to_json() };
             if (json) {
                 pane::debug(json.value());
+                auto test { self.config.from_json(json.value()) };
+
+                if (test) {
+                    pane::debug(u8"from_json success!");
+                }
             }
             // pane::debug(json.value_or(u8"error"));
 
