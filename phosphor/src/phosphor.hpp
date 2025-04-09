@@ -51,7 +51,9 @@ private:
 };
 } // namespace phosphor
 
-template <> struct glz::meta<phosphor::theme> {
+namespace glz {
+template <> struct meta<phosphor::theme> {
     using enum phosphor::theme;
-    static constexpr auto value { glz::enumerate(light, dark) };
+    static constexpr auto value { enumerate(light, dark) };
 };
+} // namespace glz
