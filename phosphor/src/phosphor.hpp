@@ -12,28 +12,29 @@
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.UI.ViewManagement.h>
 
+namespace phosphor {
 enum struct theme { light = 0, dark };
 
-struct phosphor final {
-    using Self = phosphor;
+struct app final {
+    using Self = app;
 
     struct settings final {
         std::filesystem::path dark;
         std::filesystem::path light;
     };
 
-    ~phosphor() = default;
+    ~app() = default;
 
-    phosphor(const Self& self) = delete;
+    app(const Self& self) = delete;
     auto operator=(const Self& self) -> Self& = delete;
-    phosphor(Self&& self) noexcept = delete;
+    app(Self&& self) noexcept = delete;
     auto operator=(Self&& self) noexcept -> Self& = delete;
 
-    static auto app() -> int;
+    static auto run() -> int;
 
     pane::co_init co_init { pane::co_init::apartment_threaded() };
-    pane::config<phosphor::settings> config { pane::config<phosphor::settings>() };
-    theme theme { theme::light };
+    pane::config<phosphor::app::settings> config { pane::config<phosphor::app::settings>() };
+    phosphor::theme theme { phosphor::theme::light };
     wil::com_ptr<IDesktopWallpaper> desktop_wallpaper { wil::CoCreateInstance<IDesktopWallpaper>(
         CLSID_DesktopWallpaper, CLSCTX_ALL) };
     UINT count;
@@ -46,10 +47,11 @@ struct phosphor final {
     };
 
 private:
-    phosphor() = default;
+    app() = default;
 };
+} // namespace phosphor
 
-template <> struct glz::meta<theme> {
-    using enum theme;
+template <> struct glz::meta<phosphor::theme> {
+    using enum phosphor::theme;
     static constexpr auto value { glz::enumerate(light, dark) };
 };

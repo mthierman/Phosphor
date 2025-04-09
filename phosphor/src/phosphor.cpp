@@ -3,7 +3,8 @@
 #include <glaze/glaze.hpp>
 #include <pane/pane.hxx>
 
-auto phosphor::app() -> int {
+namespace phosphor {
+auto app::run() -> int {
     auto self { Self() };
 
     self.config.load();
@@ -58,3 +59,4 @@ auto phosphor::app() -> int {
 
     return pane::system::message_loop();
 };
+} // namespace phosphor
