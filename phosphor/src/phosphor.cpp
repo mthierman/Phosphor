@@ -36,15 +36,14 @@ auto app::run() -> int {
                     pane::debug(u8"from_json success!");
                 }
             }
-            // pane::debug(json.value_or(u8"error"));
 
             if (pane::color(winrt::Windows::UI::ViewManagement::UIColorType::Background)
                     .is_dark()) {
-                pane::debug(self.config.settings.dark);
+                // pane::debug(self.config.settings.dark);
                 self.theme = theme::dark;
                 self.desktop_wallpaper->SetWallpaper(0, self.config.settings.dark.c_str());
             } else {
-                pane::debug(self.config.settings.light);
+                // pane::debug(self.config.settings.light);
                 self.theme = theme::light;
                 self.desktop_wallpaper->SetWallpaper(0, self.config.settings.light.c_str());
             }
