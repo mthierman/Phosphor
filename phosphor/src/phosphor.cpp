@@ -27,23 +27,11 @@ auto app::run() -> int {
         if (msg == WM_SETTINGCHANGE) {
             self.config.load();
 
-            auto json { self.config.to_json() };
-            if (json) {
-                pane::debug(json.value());
-                auto test { self.config.from_json(json.value()) };
-
-                if (test) {
-                    pane::debug(u8"from_json success!");
-                }
-            }
-
             if (pane::color(winrt::Windows::UI::ViewManagement::UIColorType::Background)
                     .is_dark()) {
-                // pane::debug(self.config.settings.dark);
                 self.theme = theme::dark;
                 self.desktop_wallpaper->SetWallpaper(0, self.config.settings.dark.c_str());
             } else {
-                // pane::debug(self.config.settings.light);
                 self.theme = theme::light;
                 self.desktop_wallpaper->SetWallpaper(0, self.config.settings.light.c_str());
             }
