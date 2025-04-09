@@ -27,6 +27,12 @@ auto app::run() -> int {
         if (msg == WM_SETTINGCHANGE) {
             self.config.load();
 
+            auto json { self.config.to_json() };
+            if (json) {
+                pane::debug(json.value());
+            }
+            // pane::debug(json.value_or(u8"error"));
+
             if (pane::color(winrt::Windows::UI::ViewManagement::UIColorType::Background)
                     .is_dark()) {
                 pane::debug(self.config.settings.dark);
