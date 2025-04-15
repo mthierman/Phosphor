@@ -1,4 +1,4 @@
-#include "phosphor.hpp"
+#include "phosphor.hxx"
 
 auto wWinMain(HINSTANCE /* hinstance */,
               HINSTANCE /* hprevinstance */,
