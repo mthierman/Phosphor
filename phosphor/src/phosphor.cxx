@@ -12,15 +12,15 @@ auto app::run() -> int {
     self.desktop_wallpaper->GetMonitorDevicePathAt(0, &self.monitor);
 
     auto settings_window { pane::window(
-        { .title { u8"settings" },
-          .background_color { pane::color { 0, 0, 0, 0 } },
-          .visible { true },
-          .shutdown { true },
-          .webview_config { { .home_page { u8"https://www.google.com/" } } } }) };
+        { .title = u8"settings",
+          .background_color = pane::color { 0, 0, 0, 0 },
+          .visible = true,
+          .shutdown = true,
+          .webview_config = pane::webview_config { .home_page = u8"https://www.google.com/" } }) };
 
     auto main_window { pane::window(
         { .title { u8"phosphor" },
-          .background_color { pane::color { 255, 255, 0, 255 } },
+          .background_color { pane::color { 0, 0, 0, 0 } },
           .visible { false },
           .shutdown { false } },
         [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
