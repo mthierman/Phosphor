@@ -48,6 +48,47 @@ struct app final {
 
 private:
     app() = default;
+
+    pane::webview settings_window {
+        { .title = u8"settings",
+          .background_color = pane::color { 0, 0, 0, 0 },
+          .visible = true,
+          .shutdown = true },
+        { .home_page = u8"https://www.google.com/" },
+        [&](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
+        if (msg == WM_WINDOWPOSCHANGED) {
+            auto client_rect { settings_window.window.client_rect() };
+
+            if (settings_window.controller) {
+                settings_window.controller->put_Bounds(client_rect);
+            }
+        }
+
+        return DefWindowProcW(hwnd, msg, wparam, lparam);
+    }
+    };
+
+    pane::window main_window { pane::window(
+        { .title { u8"phosphor" },
+          .background_color { pane::color { 0, 0, 0, 0 } },
+          .visible { false },
+          .shutdown { false } },
+        [&](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
+        if (msg == WM_SETTINGCHANGE) {
+            config.load();
+
+            if (pane::color(winrt::Windows::UI::ViewManagement::UIColorType::Background)
+                    .is_dark()) {
+                theme = theme::dark;
+                desktop_wallpaper->SetWallpaper(0, config.settings.dark.c_str());
+            } else {
+                theme = theme::light;
+                desktop_wallpaper->SetWallpaper(0, config.settings.light.c_str());
+            }
+        }
+
+        return DefWindowProcW(hwnd, msg, wparam, lparam);
+    }) };
 };
 } // namespace phosphor
 
