@@ -14,14 +14,12 @@ auto app::run() -> int {
     auto settings_window { pane::window({ .title { u8"settings" },
                                           .background_color { pane::color { 255, 255, 0, 255 } },
                                           .visible { true },
-                                          .webview { false },
                                           .shutdown { true } }) };
 
     auto main_window { pane::window(
         { .title { u8"phosphor" },
           .background_color { pane::color { 255, 255, 0, 255 } },
           .visible { false },
-          .webview { false },
           .shutdown { false } },
         [&self](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
         if (msg == WM_SETTINGCHANGE) {
