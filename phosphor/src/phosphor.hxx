@@ -47,10 +47,10 @@ private:
     app() = default;
 
     pane::webview settings_window { { .title = u8"settings",
-                                      .background_color = pane::color { 0, 0, 0, 0 },
+                                      .background_color = pane::color { 0, 0, 255, 255 },
                                       .visible = true,
-                                      .shutdown = true },
-                                    { .home_page = u8"https://www.google.com/" } };
+                                      .shutdown = false },
+                                    { .home_page = u8"about:blank" } };
 
     pane::window main_window { pane::window(
         { .title { u8"phosphor" },
