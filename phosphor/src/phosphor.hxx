@@ -2,10 +2,6 @@
 #include <Windows.h>
 #include <ShObjIdl.h>
 #include <filesystem>
-#include <cstdlib>
-#include <memory>
-#include <utility>
-#include <print>
 #include <wil/com.h>
 #include <glaze/glaze.hpp>
 #include <pane/pane.hxx>
@@ -27,6 +23,7 @@ struct app final {
 
     app(const Self& self) = delete;
     auto operator=(const Self& self) -> Self& = delete;
+
     app(Self&& self) noexcept = delete;
     auto operator=(Self&& self) noexcept -> Self& = delete;
 

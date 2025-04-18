@@ -1,5 +1,4 @@
 #include "phosphor.hxx"
-#include <filesystem>
 #include <glaze/glaze.hpp>
 #include <pane/pane.hxx>
 
