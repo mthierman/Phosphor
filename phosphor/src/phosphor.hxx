@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <ShObjIdl.h>
 #include <filesystem>
+#include <memory>
 #include <wil/com.h>
 #include <glaze/glaze.hpp>
 #include <pane/pane.hxx>
@@ -46,11 +47,19 @@ struct app final {
 private:
     app() = default;
 
-    pane::webview settings_window { { .title = u8"settings",
-                                      .background_color = pane::color { 0, 0, 255, 255 },
-                                      .visible = true,
-                                      .shutdown = false },
-                                    { .home_page = u8"about:blank" } };
+    // pane::webview settings_window { { .title = u8"settings",
+    //                                   .background_color = pane::color { 0, 0, 255, 255 },
+    //                                   .visible = true,
+    //                                   .shutdown = false },
+    //                                 { .home_page = u8"about:blank" } };
+
+    // pane::webview settings_window2 { { .title = u8"settings",
+    //                                    .background_color = pane::color { 0, 255, 255, 255 },
+    //                                    .visible = true,
+    //                                    .shutdown = false },
+    //                                  { .home_page = u8"about:blank" } };
+
+    std::unique_ptr<pane::webview> settings_window3;
 
     pane::window main_window { pane::window(
         { .title { u8"phosphor" },
