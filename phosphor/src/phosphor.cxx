@@ -19,8 +19,6 @@ auto app::run() -> int {
                               .shutdown = false },
         pane::webview_config { .home_page = u8"about:blank" });
 
-    auto exit_code { pane::system::message_loop() };
-
-    return exit_code;
+    return pane::system::message_loop();
 }
 } // namespace phosphor
