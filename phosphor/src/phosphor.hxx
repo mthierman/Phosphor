@@ -2,7 +2,6 @@
 #include <Windows.h>
 #include <ShObjIdl.h>
 #include <filesystem>
-#include <memory>
 #include <wil/com.h>
 #include <glaze/glaze.hpp>
 #include <pane/pane.hxx>

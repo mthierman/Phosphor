@@ -1,8 +1,4 @@
 #include "phosphor.hxx"
-#include "pane/system.hxx"
-#include "pane/window.hxx"
-#include <glaze/glaze.hpp>
-#include <pane/pane.hxx>
 
 namespace phosphor {
 auto app::run() -> int {
