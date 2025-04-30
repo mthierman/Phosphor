@@ -47,40 +47,28 @@ struct app final {
 private:
     app() = default;
 
-    // pane::webview settings_window { { .title = u8"settings",
-    //                                   .background_color = pane::color { 0, 0, 255, 255 },
-    //                                   .visible = true,
-    //                                   .shutdown = false },
-    //                                 { .home_page = u8"about:blank" } };
-
-    // pane::webview settings_window2 { { .title = u8"settings",
-    //                                    .background_color = pane::color { 0, 255, 255, 255 },
-    //                                    .visible = true,
-    //                                    .shutdown = false },
-    //                                  { .home_page = u8"about:blank" } };
-
-    std::unique_ptr<pane::webview> settings_window3;
-
     pane::window main_window { pane::window(
-        { .title { u8"phosphor" },
-          .background_color { pane::color { 0, 0, 0, 0 } },
-          .visible { false },
-          .shutdown { false } },
-        [&](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) -> LRESULT {
-        if (msg == WM_SETTINGCHANGE) {
-            config.load();
+        { u8"window", pane::color { 0, 0, 0, 255 }, true, nullptr },
+        [&](pane::window* window, pane::window_message window_message) -> LRESULT {
+        switch (window_message.event) {
+            case WM_SETTINGCHANGE: {
+                config.load();
 
-            if (pane::color(winrt::Windows::UI::ViewManagement::UIColorType::Background)
-                    .is_dark()) {
-                theme = theme::dark;
-                desktop_wallpaper->SetWallpaper(0, config.settings.dark.c_str());
-            } else {
-                theme = theme::light;
-                desktop_wallpaper->SetWallpaper(0, config.settings.light.c_str());
-            }
+                if (pane::color(winrt::Windows::UI::ViewManagement::UIColorType::Background)
+                        .is_dark()) {
+                    theme = theme::dark;
+                    desktop_wallpaper->SetWallpaper(0, config.settings.dark.c_str());
+                } else {
+                    theme = theme::light;
+                    desktop_wallpaper->SetWallpaper(0, config.settings.light.c_str());
+                }
+            } break;
+            case WM_DESTROY: {
+                PostQuitMessage(0);
+            } break;
         }
 
-        return DefWindowProcW(hwnd, msg, wparam, lparam);
+        return window_message.default_procedure();
     }) };
 };
 } // namespace phosphor
